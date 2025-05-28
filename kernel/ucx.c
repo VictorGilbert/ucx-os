@@ -73,7 +73,7 @@ void krnl_panic(uint32_t ecode)
 	int err;
 	
 	// _di(); //TODO: Integrer fonction qui disable les interruptions, check interrupt.asm
-	_disable_interrupt_();
+	_disable_interrupt_(); //Definir __di(), dans hal avec cette fonction
 	
 	printf("\n*** HALT (%d)", ecode);
 	for (err = 0; perror[err].ecode != ERR_UNKNOWN; err++)
