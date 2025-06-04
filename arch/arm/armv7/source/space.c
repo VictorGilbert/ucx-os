@@ -14,7 +14,7 @@
 #include <libpok_legacy/space.h>
 #include <mpu.h>
 
-#include "../../boards/armv7/include/bsp/serial.h"
+#include <bsp/serial.h>
 #define mpuSUBREGION_DISABLE (mpuSUBREGION0_DISABLE | mpuSUBREGION1_DISABLE | mpuSUBREGION2_DISABLE |\
                               mpuSUBREGION3_DISABLE | mpuSUBREGION4_DISABLE | mpuSUBREGION5_DISABLE |\
                               mpuSUBREGION6_DISABLE | mpuSUBREGION7_DISABLE)
@@ -149,6 +149,31 @@ void mpu_set_region(uint32_t region_id, uint32_t base_address,
     _mpuSetRegionTypeAndPermission_(type, permissions);
     _mpuSetRegionSizeRegister_(size);
 }
+
+/*
+ * Array of user space descriptions.
+ *
+ * Should be defined in deployment.c.
+ */
+ struct ja_armv7_space ja_spaces[2] =
+ {
+     {
+         //.phys_base is filled upon initialization
+         .size_normal = 0x29000,
+         .size_heap = 8192,
+         // Currently stack size is hardcoded to 8K.
+         .size_stack = 4 * 4 * 1024
+     },
+     {
+         //.phys_base is filled upon initialization
+         .size_normal = 0x29000,
+         .size_heap = 8192,
+         // Currently stack size is hardcoded to 8K.
+         .size_stack = 3 * 4 * 1024
+     },
+ };
+ 
+ int ja_spaces_n = 2;
 
 void ja_space_init(void)
 {

@@ -46,59 +46,32 @@
 MEMORY
 {
 	/* Interrupt vector */
-    VECTORS (X) : origin=0x08000000 length=0x00000020
-    FLASH   (RX) : origin=0x08000020 length=0x0003FFE0
-    RAM    (RW) : origin=0x20000000 length=0x00010000
+    VECTORS (X)  : origin=0x00000000 length=0x00001000
+    FLASH   (RX) : origin=0x00001000 length=0x000FFFE0
+    S_FLASH (RX) : origin=0x00100FE0 length=0x00100000
+    HEAP    (RW) : origin=0x00200FE0 length=0x00010000
+    KRAM    (RW) : origin=0x00210FE0 length=0x00004000
+    URAM    (RW) : origin=0x00214FE0 length=0x00067FFF
 }
 
 /*----------------------------------------------------------------------------*/
-
 /* Section Configuration                                                      */
 
-/*----------------------------------------------------------------------------*/
- 
 SECTIONS
 {
 	/* Int vectors first */
-    .intvecs :       align{} > VECTORS
+    .intvecs :               {} > VECTORS
     /* Rest of code to user mode flash region */
     .text        align(32) : {} > FLASH
-    .data        align(32) : {} > RAM
-    .bss       align(32) : {} > RAM
-    .heap         align(32) : {} > RAM
-    .stack         align(32) : {} > RAM
+    .const       align(32) : {} > FLASH
+    .data        align(32) : {} > KRAM
+    .bss         align(32) : {} > KRAM
+    .cinit                 : {} > FLASH
+    .shared_code align(32) : {} > S_FLASH
+    .sysheap     align(32) : {} > HEAP
+
+
 }
-
-/*----------------------------------------------------------------------------*/
-/* Stack & Heap Definitions                                                   */
-/*----------------------------------------------------------------------------*/
-/* Stack size = 8K */
-
-STACK_SIZE = 0x00002000;
-
-/* Compute stack start and end in RAM */
-STACK_START = 0x20000000 + 0x00010000;
-STACK_END = STACK_START - STACK_SIZE;
-
-/*Heap begins immediately after _ebss (end of BSS) and grows up to STACK_END */
-HEAP_START = 0x20000000 + 0x00010000;
-HEAP_END = STACK_END;
-
-/*----------------------------------------------------------------------------*/
-
-/* Exported Symbols (optional for debugging/use in C startup)                  */
-
-/*----------------------------------------------------------------------------*/
- 
-/* Provide symbols for C runtime or debug */
-
-PROVIDE(__StackTop   = STACK_START);
-
-PROVIDE(__StackLimit = STACK_END);
-
-PROVIDE(__HeapBase   = HEAP_START);
-
-PROVIDE(__HeapLimit  = HEAP_END);
 
 /*----------------------------------------------------------------------------*/
 /* Misc                                                                       */

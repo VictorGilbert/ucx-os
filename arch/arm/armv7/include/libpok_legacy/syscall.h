@@ -79,7 +79,7 @@ int	pok_core_syscall (const pok_syscall_id_t     syscall_id,
  * initiate the syscall in a different way.
  */
 int pok_syscall_init();
-
+int pok_arch_sc_int(uint32_t num, pok_syscall_args_t* args);
 
 
 #define LIBJET_ARCH_DECLARE_SYSCALL 1

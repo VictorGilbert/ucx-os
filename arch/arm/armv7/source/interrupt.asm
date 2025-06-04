@@ -78,28 +78,6 @@ _get_cspr_:
 
 	 .endasmfunc
 
-
-	.ref pok_arch_sc_int
-	.def pok_arch_sc_wrapper
-	.asmfunc
-pok_arch_sc_wrapper:
-	srsfd	sp!, #0x13
-	push    {r1-R12,lr}
-
-	stmfd  r13, {r13,r14}^
-	nop
-	sub r13, r13, #8
-
-	bl pok_arch_sc_int
-
-	ldmfd r13, {r13, r14}^
-	add r13, r13, #8
-
-	pop	{r1-r12,lr}
-	rfefd	sp!
-	.endasmfunc
-
-
     .sect ".intvecs"
     .arm
 
@@ -107,7 +85,6 @@ pok_arch_sc_wrapper:
 ; Reset Vector, jump to init
 	b _c_int00
 	b defaultint
-	b pok_arch_sc_wrapper
 	b defaultint
 	b defaultint
 	b defaultint

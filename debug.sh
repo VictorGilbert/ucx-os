@@ -15,7 +15,7 @@ make ucx
 ./rename_obj_to_o.sh
 make ucx
 
-# mv ./echo.o build/app/echo.o
+mv ./echo.o build/app/echo.o
 make echo
 ./rename_obj_to_o.sh
 mv echo.o build/app

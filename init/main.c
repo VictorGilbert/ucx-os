@@ -15,7 +15,7 @@ int32_t main(void)
 	struct tcb_s *task;
 	int32_t pr;
 	
-	_hardware_init(); //Je pars du principe que c'est fait avant TODO: Faire que ca compile -> / pok_arch_init();
+	_hardware_init();
 
 
 	printf("UCX/OS v%s boot on %s\n", __VER__, __ARCH__);

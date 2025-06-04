@@ -16,6 +16,8 @@
 // #include <asp/uaccess.h>
 #include <libpok_legacy/assert.h>
 #include <libpok_legacy/space.h>
+#include <arch/deployment.h>
+
 // #include <libpok_legacy/deployment.h>
 struct ja_armv7_space
 {
@@ -77,8 +79,25 @@ struct ja_armv7_space
  *
  * Should be defined in deployment.c.
  */
-extern struct ja_armv7_space ja_spaces[];
-extern int ja_spaces_n;
+ struct ja_armv7_space ja_spaces[2] =
+ {
+     {
+         //.phys_base is filled upon initialization
+         .size_normal = 0x29000,
+         .size_heap = 8192,
+         // Currently stack size is hardcoded to 8K.
+         .size_stack = 4 * 4 * 1024
+     },
+     {
+         //.phys_base is filled upon initialization
+         .size_normal = 0x29000,
+         .size_heap = 8192,
+         // Currently stack size is hardcoded to 8K.
+         .size_stack = 3 * 4 * 1024
+     },
+ };
+ 
+ int ja_spaces_n = 2;
 
 // TODO: Revisit (see also pok_space_* code in arch.h)
 static pok_bool_t arm_check_access(const void* __user addr, size_t size,

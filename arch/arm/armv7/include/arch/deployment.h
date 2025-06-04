@@ -18,9 +18,6 @@
 
 /* Definitions which are used in deployment.c */
 
-#ifndef __JET_ARMV7_DEPLOYMENT_H__
-#define __JET_X86_DEPLOYMENT_H__
-
 #include <stddef.h>
 #include <stdint.h>
 
@@ -89,5 +86,3 @@ struct ja_armv7_space
  */
 extern struct ja_armv7_space ja_spaces[];
 extern int ja_spaces_n;
-
-#endif /* __JET_X86_DEPLOYMENT_H__ */

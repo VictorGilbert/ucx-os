@@ -18,6 +18,7 @@
 extern unsigned int _get_cspr_(void);
 extern void _idle_loop(void);
 extern void ja_fp_init(void);
+extern void ja_bsp_init(void);
 
 void pok_arch_init(void)
 {

@@ -27,7 +27,7 @@
 #include <libpok_legacy/syscall.h>
 #include <libpok_legacy/partition.h>
 
-#include "libpok_legacy/types.h"
+#include <libpok_legacy/types.h>
 #include <libc.h>
 
 int pok_arch_sc_int(uint32_t num, pok_syscall_args_t* args)
@@ -49,5 +49,5 @@ int pok_arch_sc_int(uint32_t num, pok_syscall_args_t* args)
    /* prepare syscall_id */
    syscall_id = (pok_syscall_id_t) num;
 
-   return pok_core_syscall (syscall_id, args, &syscall_info);
+   return lja_do_syscall();
 }

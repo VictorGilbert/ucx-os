@@ -24,8 +24,12 @@
 
 #include "bsp/bsp.h"
 #include "bsp/serial.h"
-
-#if defined (POK_NEEDS_CONSOLE) || defined (POK_NEEDS_DEBUG) || defined (POK_NEEDS_INSTRUMENTATION) || defined (POK_NEEDS_COVERAGE_INFOS)
+/* Main and debug consoles.
+* 
+* Exposed for future use.
+*/
+extern struct jet_console jet_console_main;
+extern struct jet_console jet_console_debug;
 
 static size_t iostream_write_main(const char* s, size_t length)
 {
@@ -96,17 +100,42 @@ struct jet_iostream arm_stream_debug =
     .write = &iostream_write_debug,
     .read  = &iostream_read_debug
 };
+static size_t iostream_write_null(const char* s, size_t length)
+{
+   return length;
+}
+static size_t iostream_read_null(char* s, size_t length)
+{
+   return 0;
+}
+struct jet_iostream jet_stream_null =
+{
+   .write = &iostream_write_null,
+   .read = &iostream_read_null
+};
+
+static struct jet_iostream* iostream_get_default(struct jet_iostream* arch_default)
+{
+   if(arch_default) return arch_default;
+   else return &jet_stream_null;
+}
+
 
 struct jet_iostream* ja_stream_default_read = &arm_stream_main;
 struct jet_iostream* ja_stream_default_write = &arm_stream_main;
 struct jet_iostream* ja_stream_default_read_debug = &arm_stream_debug;
 struct jet_iostream* ja_stream_default_write_debug = &arm_stream_debug;
+void jet_console_init_all(void)
+{
+//    jet_console_main.read_stream = iostream_get_default(ja_stream_default_read);
+//    jet_console_main.write_stream = iostream_get_default(ja_stream_default_write);
+//    jet_console_debug.read_stream = iostream_get_default(ja_stream_default_read_debug);
+//    jet_console_debug.write_stream = iostream_get_default(ja_stream_default_write_debug);
 
-#else
+//    iostream_init(jet_console_main.read_stream);
+//    iostream_init(jet_console_main.write_stream);
+//    iostream_init(jet_console_debug.read_stream);
+//    iostream_init(jet_console_debug.write_stream);
+}
 
-struct jet_iostream* ja_stream_default_read = NULL;
-struct jet_iostream* ja_stream_default_write = NULL;
-struct jet_iostream* ja_stream_default_read_debug = NULL;
-struct jet_iostream* ja_stream_default_write_debug = NULL;
 
-#endif

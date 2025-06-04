@@ -1,4 +1,4 @@
-PATH_TO_TI_DIR = /home/user/ti
+PATH_TO_TI_DIR = /home/victorgilbert/ti
 TI_ENV = ${PATH_TO_TI_DIR}/compiler/ti-cgt-arm_20.2.7.LTS/bin 
 ARCH_DIR = $(SRC_DIR)/arch/$(ARCH)
 
@@ -12,12 +12,12 @@ F_TICK = 100
 
 INC_DIRS  = -I $(ARCH_DIR)/include \
 	-I $(ARCH_DIR)/include/arch \
+	-I $(SRC_DIR)/include/kernel \
+	-I $(SRC_DIR)/include/libpok_legacy/ \
 	-I $(ARCH_DIR)/drivers/include \
 	-I $(ARCH_DIR)/boards/armv7/include \
-	-I $(ARCH_DIR)/boards/armv7/include/bsp \
-	-I $(SRC_DIR)/include/kernel \
+	-I $(ARCH_DIR)/boards/armv7/include/bsp/ \
 	-I $(SRC_DIR)/drivers/bus/include/ \
-	-I $(SRC_DIR)/include/libpok_legacy \
 	-I ${PATH_TO_TI_DIR}/compiler/ti-cgt-arm_20.2.7.LTS/lib/src \
 	-I ${PATH_TO_TI_DIR}/compiler/ti-cgt-arm_20.2.7.LTS/lib/src/machine \
 	-I $(ARCH_DIR)/common
@@ -43,6 +43,12 @@ CFLAGS = -mv7R5 --code_state=32 --float_support=VFPv3D16 -Ooff -c      	\
 LDFLAGS = -i"${PATH_TO_TI_DIR}/compiler/ti-cgt-arm_20.2.7.LTS/lib"
 .PHONY: hal
 hal:
+	$(CC) $(CFLAGS) -o $(ARCH_DIR)/boards/armv7/*.c
+	$(CC) $(CFLAGS) -o $(ARCH_DIR)/drivers/source/*.c
+	$(CC) $(CFLAGS) -o $(LDFLAGS)/src/*.c
+
+	$(CC) $(CFLAGS) -o entry.o $(ARCH_DIR)/source/entry.asm
+	$(CC) $(CFLAGS) -o interrupt.o $(ARCH_DIR)/source/interrupt.asm
 	$(CC) $(CFLAGS) -o cswitch.o $(ARCH_DIR)/source/cswitch.asm
 	$(CC) $(CFLAGS) -o syscall.o $(ARCH_DIR)/source/syscall.asm
 	$(CC) $(CFLAGS) -o fpu.o $(ARCH_DIR)/source/fpu.asm
@@ -51,10 +57,7 @@ hal:
 	$(CC) $(CFLAGS) -o HL_sys_intvecs.o $(ARCH_DIR)/drivers/source/HL_sys_intvecs.asm
 	$(CC) $(CFLAGS) -o HL_sys_mpu.o $(ARCH_DIR)/drivers/source/HL_sys_mpu.asm
 	$(CC) $(CFLAGS) -o HL_sys_pmu.o $(ARCH_DIR)/drivers/source/HL_sys_pmu.asm
+	$(CC) $(CFLAGS) -o $(ARCH_DIR)/source/*.c
 	
-	$(CC) $(CFLAGS) \
-		$(ARCH_DIR)/source/*.c \
-		$(ARCH_DIR)/drivers/source/*.c \
-		$(ARCH_DIR)/boards/armv7/*.c \
-		$(LDFLAGS)/src/*.c	
 	sh ./$(ARCH_DIR)/rename_obj_to_o.sh
+# $(ARCH_DIR)/boards/armv7/boards/*.c \

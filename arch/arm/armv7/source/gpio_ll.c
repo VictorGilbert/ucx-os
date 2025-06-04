@@ -109,122 +109,122 @@ void _context_init(jmp_buf *ctx, size_t sp, size_t ss, size_t ra)
 }
 
 #define NUMBER_OF_PINS 16
-int gpio_ll_setup(struct gpio_config_values_s *cfg)
-{
-	uint32_t modesel, pullsel;
-	for (int i = 0; i < NUMBER_OF_PINS; i++) {
-		if (cfg->pinsel & (1 << i)) {
-			modesel = (cfg->mode & (3 << (i << 1))) >> (i << 1);
-			pullsel = (cfg->pull & (3 << (i << 1))) >> (i << 1);
+// int gpio_ll_setup(struct gpio_config_values_s *cfg)
+// {
+// 	uint32_t modesel, pullsel;
+// 	for (int i = 0; i < NUMBER_OF_PINS; i++) {
+// 		if (cfg->pinsel & (1 << i)) {
+// 			modesel = (cfg->mode & (3 << (i << 1))) >> (i << 1);
+// 			pullsel = (cfg->pull & (3 << (i << 1))) >> (i << 1);
 
-			switch (modesel) {
-				case GPIO_INPUT:
-					switch (cfg->port) {
-						case GPIO_PORTA:
-							gioPORTA->DIR = (uint32)((uint32)1 << i);
-							switch (pullsel) {
-								case GPIO_NOPULL:
-									gioPORTA->PULDIS |= (uint32)((uint32)1 << i);
-									return 0;
-								case GPIO_PULLUP: 
-									gioPORTA->PSL |= (uint32)((uint32)1 << i);
-									return 0;
-								case GPIO_PULLDOWN: 
-									gioPORTA->PSL &= ~(uint32)((uint32)1 << i);
-									return 0;
-								default: return -1;
-								}
+// 			switch (modesel) {
+// 				case GPIO_INPUT:
+// 					switch (cfg->port) {
+// 						case GPIO_PORTA:
+// 							gioPORTA->DIR = (uint32)((uint32)1 << i);
+// 							switch (pullsel) {
+// 								case GPIO_NOPULL:
+// 									gioPORTA->PULDIS |= (uint32)((uint32)1 << i);
+// 									return 0;
+// 								case GPIO_PULLUP: 
+// 									gioPORTA->PSL |= (uint32)((uint32)1 << i);
+// 									return 0;
+// 								case GPIO_PULLDOWN: 
+// 									gioPORTA->PSL &= ~(uint32)((uint32)1 << i);
+// 									return 0;
+// 								default: return -1;
+// 								}
 		
-						case GPIO_PORTB:
-							gioPORTB->DIR = (uint32)((uint32)1 << i);
-							switch (pullsel) {
-								case GPIO_NOPULL:
-									gioPORTA->PULDIS |= (uint32)((uint32)1 << i);
-									return 0;
-								case GPIO_PULLUP: 
-									gioPORTA->PSL |= (uint32)((uint32)1 << i);
-									return 0;
-								case GPIO_PULLDOWN: 
-									gioPORTA->PSL &= ~(uint32)((uint32)1 << i);
-									return 0;
-								default: return -1;
-								}
-							}
-				case GPIO_OUTPUT:
-					gioPORTA->PULDIS = (uint32)((uint32)0 << i);
-					switch (cfg->port) {
-						case GPIO_PORTA:  gioPORTA->DIR &= ~(uint32)((uint32)1 << i);
-							return 0;
-						case GPIO_PORTB:  gioPORTB->DIR &= ~(uint32)((uint32)1 << i);
-							return 0;
-						default: return -1;
-					}
-				case GPIO_OUTPUT_OD:
-					gioPORTA->PULDIS = (uint32)((uint32)1 << i);
-					switch (cfg->port) {
-						case GPIO_PORTA:  gioPORTA->DIR &= ~(uint32)((uint32)1 << i);
-							return 0;
-						case GPIO_PORTB:  gioPORTB->DIR &= ~(uint32)((uint32)1 << i);
-							return 0;
-						default: return -1;
-					}
+// 						case GPIO_PORTB:
+// 							gioPORTB->DIR = (uint32)((uint32)1 << i);
+// 							switch (pullsel) {
+// 								case GPIO_NOPULL:
+// 									gioPORTA->PULDIS |= (uint32)((uint32)1 << i);
+// 									return 0;
+// 								case GPIO_PULLUP: 
+// 									gioPORTA->PSL |= (uint32)((uint32)1 << i);
+// 									return 0;
+// 								case GPIO_PULLDOWN: 
+// 									gioPORTA->PSL &= ~(uint32)((uint32)1 << i);
+// 									return 0;
+// 								default: return -1;
+// 								}
+// 							}
+// 				case GPIO_OUTPUT:
+// 					gioPORTA->PULDIS = (uint32)((uint32)0 << i);
+// 					switch (cfg->port) {
+// 						case GPIO_PORTA:  gioPORTA->DIR &= ~(uint32)((uint32)1 << i);
+// 							return 0;
+// 						case GPIO_PORTB:  gioPORTB->DIR &= ~(uint32)((uint32)1 << i);
+// 							return 0;
+// 						default: return -1;
+// 					}
+// 				case GPIO_OUTPUT_OD:
+// 					gioPORTA->PULDIS = (uint32)((uint32)1 << i);
+// 					switch (cfg->port) {
+// 						case GPIO_PORTA:  gioPORTA->DIR &= ~(uint32)((uint32)1 << i);
+// 							return 0;
+// 						case GPIO_PORTB:  gioPORTB->DIR &= ~(uint32)((uint32)1 << i);
+// 							return 0;
+// 						default: return -1;
+// 					}
 
-			}
-		}
-	}
-}
+// 			}
+// 		}
+// 	}
+// }
 
 
-int gpio_ll_get(struct gpio_config_values_s *cfg){
+// int gpio_ll_get(struct gpio_config_values_s *cfg){
 	
-	switch (cfg->port) {
-		case GPIO_PORTA:  return gioGetBit(gioPORTA, cfg->pinsel); break;
-		case GPIO_PORTB:  return gioGetBit(gioPORTB, cfg->pinsel); break;
-		default: return -1;
-	}
-}
+// 	switch (cfg->port) {
+// 		case GPIO_PORTA:  return gioGetBit(gioPORTA, cfg->pinsel); break;
+// 		case GPIO_PORTB:  return gioGetBit(gioPORTB, cfg->pinsel); break;
+// 		default: return -1;
+// 	}
+// }
 
-int gpio_ll_set(struct gpio_config_values_s *cfg, int val){
-	switch (cfg->port) {
-		case GPIO_PORTA:  return gioSetBit(gioPORTA, cfg->pinsel, val); break;
-		case GPIO_PORTB:  return gioSetBit(gioPORTB, cfg->pinsel, val); break;
-		default: return -1;
-	}
-}
+// int gpio_ll_set(struct gpio_config_values_s *cfg, int val){
+// 	switch (cfg->port) {
+// 		case GPIO_PORTA:  return gioSetBit(gioPORTA, cfg->pinsel, val); break;
+// 		case GPIO_PORTB:  return gioSetBit(gioPORTB, cfg->pinsel, val); break;
+// 		default: return -1;
+// 	}
+// }
 
-int gpio_ll_clear(struct gpio_config_values_s *cfg, int val){
-	// switch (cfg->port) {
-	// 	case GPIO_PORTA:  gioSetBit(gioPORTA, cfg->pinsel, val); break;
-	// 	case GPIO_PORTB:  gioSetBit(gioPORTA, cfg->pinsel, val); break;
-	// }
-	return gpio_ll_set(&cfg, val);
-}
+// int gpio_ll_clear(struct gpio_config_values_s *cfg, int val){
+// 	// switch (cfg->port) {
+// 	// 	case GPIO_PORTA:  gioSetBit(gioPORTA, cfg->pinsel, val); break;
+// 	// 	case GPIO_PORTB:  gioSetBit(gioPORTA, cfg->pinsel, val); break;
+// 	// }
+// 	return gpio_ll_set(&cfg, val);
+// }
 
-int gpio_ll_toggle(struct gpio_config_values_s *cfg, int val){
-	switch (cfg->port) {
-		case GPIO_PORTA:  return gioToggleBit(gioPORTA, cfg->pinsel); break;
-		case GPIO_PORTB:  return gioToggleBit(gioPORTB, cfg->pinsel); break;
-		default: return -1;
-	}
-}
+// int gpio_ll_toggle(struct gpio_config_values_s *cfg, int val){
+// 	switch (cfg->port) {
+// 		case GPIO_PORTA:  return gioToggleBit(gioPORTA, cfg->pinsel); break;
+// 		case GPIO_PORTB:  return gioToggleBit(gioPORTB, cfg->pinsel); break;
+// 		default: return -1;
+// 	}
+// }
 
 static void (*int_cb[MAX_INT_SOURCES])(void) = { 0 };
 
-int gpio_ll_int_attach(struct gpio_config_values_s *cfg, int pin, void (*callback)(), int trigger){
-	//Trigger: GPIO_RISING, GPIO_FALLING -- je comprends pas trop
+// int gpio_ll_int_attach(struct gpio_config_values_s *cfg, int pin, void (*callback)(), int trigger){
+// 	//Trigger: GPIO_RISING, GPIO_FALLING -- je comprends pas trop
 
-	switch (cfg->port) {
-		case GPIO_PORTA:  
-			int_cb[pin] = callback;
-			return gioEnableNotification(gioPORTA, pin); 
-			break;
-		case GPIO_PORTB:  		
-			int_cb[pin + 8U] = callback;
-			return gioEnableNotification(gioPORTB, pin); 
-			break;
-		default: return -1;
-	}
-}
+// 	switch (cfg->port) {
+// 		case GPIO_PORTA:  
+// 			int_cb[pin] = callback;
+// 			return gioEnableNotification(gioPORTA, pin); 
+// 			break;
+// 		case GPIO_PORTB:  		
+// 			int_cb[pin + 8U] = callback;
+// 			return gioEnableNotification(gioPORTB, pin); 
+// 			break;
+// 		default: return -1;
+// 	}
+// }
 
 int i2c_ll_init(struct i2c_hw_config_values_s *config_values){
 	// i2cBASE_t I2C_InitStruct;

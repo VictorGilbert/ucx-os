@@ -1,20 +1,9 @@
 
 	.ref pok_arch_init
 	.ref jet_boot
-
+    .ref main
 	.text
 	.arm
-
-; Kernel entry point
-	.def    _c_int00
-	.asmfunc
-_c_int00:
-	bl _init_cpu_arch
-	bl _cpu_reg_init
-	bl pok_arch_init
-	bl jet_boot
-
-	.endasmfunc
 
 ; IDLE routine
 	.def    _idle_loop
