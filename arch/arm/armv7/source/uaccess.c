@@ -19,85 +19,85 @@
 #include <arch/deployment.h>
 
 // #include <libpok_legacy/deployment.h>
-struct ja_armv7_space
-{
-    /*
-     * Physical address of memory chunk.
-     *
-     * If it is set to 0 in deployment.c, it will be filled upon space initialization.
-     */
-    uint32_t   phys_base;
+// struct ja_armv7_space
+// {
+//     /*
+//      * Physical address of memory chunk.
+//      *
+//      * If it is set to 0 in deployment.c, it will be filled upon space initialization.
+//      */
+//     uint32_t   phys_base;
 
-    /*
-     * Size of the memory  (code and static data).
-     *
-     * Set in deployment.c.
-     */
-    size_t      size_normal;
+//     /*
+//      * Size of the memory  (code and static data).
+//      *
+//      * Set in deployment.c.
+//      */
+//     size_t      size_normal;
 
-    /*
-     * Size of the memory  (heap).
-     *
-     * Set in deployment.c.
-     */
-    size_t      size_heap;
+//     /*
+//      * Size of the memory  (heap).
+//      *
+//      * Set in deployment.c.
+//      */
+//     size_t      size_heap;
 
-    /*
-     * Size of the memory for stacks.
-     *
-     * Set in deployment.c.
-     */
-    size_t size_stack;
+//     /*
+//      * Size of the memory for stacks.
+//      *
+//      * Set in deployment.c.
+//      */
+//     size_t size_stack;
 
-    /*
-     * Total size for partition's use.
-     *
-     * Calculated upon space initialization.
-     */
-    size_t size_total;
+//     /*
+//      * Total size for partition's use.
+//      *
+//      * Calculated upon space initialization.
+//      */
+//     size_t size_total;
 
-    /*
-     * Offset from the beginning of the space to the ending of the heap.
-     *
-     * Calculated upon space initialization.
-     */
-    size_t heap_end;
-    /*
-     * Memory currently used for stacks.
-     */
-    size_t size_stack_used;
+//     /*
+//      * Offset from the beginning of the space to the ending of the heap.
+//      *
+//      * Calculated upon space initialization.
+//      */
+//     size_t heap_end;
+//     /*
+//      * Memory currently used for stacks.
+//      */
+//     size_t size_stack_used;
 
-    uint32_t mpu_base[11];
-    uint32_t mpu_size[11];
-    uint32_t mpu_reg;
-    uint32_t mpu_type;
-    uint32_t mpu_perm;
-};
+//     uint32_t mpu_base[11];
+//     uint32_t mpu_size[11];
+//     uint32_t mpu_reg;
+//     uint32_t mpu_type;
+//     uint32_t mpu_perm;
+// };
 
 /*
  * Array of user space descriptions.
  *
  * Should be defined in deployment.c.
  */
- struct ja_armv7_space ja_spaces[2] =
- {
-     {
-         //.phys_base is filled upon initialization
-         .size_normal = 0x29000,
-         .size_heap = 8192,
-         // Currently stack size is hardcoded to 8K.
-         .size_stack = 4 * 4 * 1024
-     },
-     {
-         //.phys_base is filled upon initialization
-         .size_normal = 0x29000,
-         .size_heap = 8192,
-         // Currently stack size is hardcoded to 8K.
-         .size_stack = 3 * 4 * 1024
-     },
- };
+//  struct ja_armv7_space ja_spaces[2] =
+//  {
+//      {
+//          //.phys_base is filled upon initialization
+//          .size_normal = 0x29000,
+//          .size_heap = 8192,
+//          // Currently stack size is hardcoded to 8K.
+//          .size_stack = 4 * 4 * 1024
+//      },
+//      {
+//          //.phys_base is filled upon initialization
+//          .size_normal = 0x29000,
+//          .size_heap = 8192,
+//          // Currently stack size is hardcoded to 8K.
+//          .size_stack = 3 * 4 * 1024
+//      },
+//  };
  
- int ja_spaces_n = 2;
+//  int ja_spaces_n = 2;
 
 // TODO: Revisit (see also pok_space_* code in arch.h)
 static pok_bool_t arm_check_access(const void* __user addr, size_t size,

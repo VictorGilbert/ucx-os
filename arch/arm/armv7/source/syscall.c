@@ -49,5 +49,6 @@ int pok_arch_sc_int(uint32_t num, pok_syscall_args_t* args)
    /* prepare syscall_id */
    syscall_id = (pok_syscall_id_t) num;
 
-   return lja_do_syscall();
+   return lja_do_syscall(syscall_id,&((pok_syscall_args_t){5,args->arg1,args->arg2,args->arg3,args->arg4,args->arg5}));
+
 }
