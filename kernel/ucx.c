@@ -112,16 +112,15 @@ uint16_t krnl_schedule(void)
 {
 	int itcnt = 0;
 	struct tcb_s *task = kcb->task_current->data;
+	struct node_s *node = kcb->task_current;
 	
 	if (task->state == TASK_RUNNING)
 		task->state = TASK_READY;
-		
+	
 	do {
 		do {
-			kcb->task_current = kcb->task_current->next;
-			if (kcb->task_current == kcb->tasks->tail)
-				kcb->task_current = kcb->tasks->head->next;
-			task = kcb->task_current->data;
+			node = list_cnext(kcb->tasks, node);
+			task = node->data;
 
 			if (itcnt++ > KRNL_SCHED_IMAX)
 				krnl_panic(ERR_NO_TASKS);
@@ -129,6 +128,7 @@ uint16_t krnl_schedule(void)
 		} while (task->state != TASK_READY || task->rt_prio);
 	} while (--task->priority & 0xff);
 	
+	kcb->task_current = node;
 	task->priority |= (task->priority >> 8) & 0xff;
 	task->state = TASK_RUNNING;
 	
@@ -240,7 +240,7 @@ int32_t ucx_task_spawn(void *task, uint16_t stack_size)
 
 	new_tcb->state = TASK_READY;
 
-	return ERR_OK;
+	return new_tcb->id;
 }
 
 int32_t ucx_task_cancel(uint16_t id)

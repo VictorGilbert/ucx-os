@@ -141,6 +141,67 @@ void *list_popback(struct list_s *list)
 	return val;
 }
 
+struct node_s *list_next(struct node_s *node)
+{
+	return node->next;
+}
+
+struct node_s *list_cnext(struct list_s *list, struct node_s *node)
+{
+	if (node->next->next == 0)
+		return list->head->next;
+	else
+		return node->next;
+}
+
+void *list_move(struct list_s *list_dst, struct list_s *list_src, struct node_s *node)
+{
+	struct node_s *last;
+	void *val;
+	
+	if (node->next == 0 || node == 0)
+		return 0;
+	
+	val = node->data;
+	
+	last = list_src->head;
+	while (last->next != node)
+		last = last->next;
+	
+	last->next = node->next;
+	list_src->length--;
+	
+	node->next = 0;
+	last = list_dst->tail;
+	list_dst->tail->next = node;
+	list_dst->tail->data = val;
+	list_dst->tail = node;
+	node->data = 0;
+	list_dst->length++;
+	
+	return val;
+}
+
+struct node_s *list_rotate(struct list_s *list)
+{
+	struct node_s *node;
+	struct node_s *last;
+
+	if (!list->head->next->next)
+		return 0;
+	
+	node = list->head->next;
+	list->head->next = node->next;
+	last = list->tail;
+	list->tail->next = node;
+	list->tail->data = node->data;
+	list->tail = node;
+	node->data = 0;
+	node->next = 0;
+	
+	return last;
+}
+
 struct node_s *list_insert(struct list_s *list, struct node_s *prevnode, void *val)
 {
 	struct node_s *node;
@@ -166,12 +227,12 @@ struct node_s *list_insert(struct list_s *list, struct node_s *prevnode, void *v
 	return node;	
 }
 
-struct node_s *list_remove(struct list_s *list, struct node_s *node)
+void *list_remove(struct list_s *list, struct node_s *node)
 {
 	struct node_s *last;
 	void *val;
 	
-	if (node->next == 0 || node == 0)
+	if (node == list->head || node == list->tail)
 		return 0;
 	
 	val = node->data;
@@ -252,10 +313,10 @@ struct dlist_s *dlist_create()
 	
 	head->prev = 0;
 	head->next = tail;
-	head->data = (void *)0xbaadf00d;
+	head->data = (void *)0xdead;;
 	tail->prev = head;
 	tail->next = 0;
-	tail->data = (void *)0xdeadbeef;
+	tail->data = 0;
 	
 	list->head = head;
 	list->tail = tail;
@@ -354,6 +415,80 @@ void *dlist_popback(struct dlist_s *list)
 	return val;
 }
 
+struct dnode_s *dlist_next(struct dnode_s *node)
+{
+	return node->next;
+}
+
+struct dnode_s *dlist_prev(struct dnode_s *node)
+{
+	return node->prev;
+}
+
+
+struct dnode_s *dlist_cnext(struct dlist_s *list, struct dnode_s *node)
+{
+	if (node->next->next == 0)
+		return list->head->next;
+	else
+		return node->next;
+}
+
+struct dnode_s *dlist_cprev(struct dlist_s *list, struct dnode_s *node)
+{
+	if (node->prev->prev == 0)
+		return list->tail->prev;
+	else
+		return node->prev;
+}
+
+void *dlist_move(struct dlist_s *list_dst, struct dlist_s *list_src, struct dnode_s *node)
+{
+	struct dnode_s *last;
+	void *val;
+	
+	if (node->prev == 0 || node->next == 0 || node == 0)
+		return 0;
+	
+	val = node->data;
+	
+	last = list_src->head;
+	while (last->next != node)
+		last = last->next;
+
+	node->prev->next = node->next;
+	node->next->prev = node->prev;
+	list_src->length--;
+
+	node->prev = list_dst->tail->prev;
+	node->next = list_dst->tail;	
+	list_dst->tail->prev->next = node;
+	list_dst->tail->prev = node;
+	list_dst->length++;
+	
+	return val;
+}
+
+struct dnode_s *dlist_rotate(struct dlist_s *list)
+{
+	struct dnode_s *node;
+	struct dnode_s *last;
+
+	if (!list->head->next->next)
+		return 0;
+
+	node = list->head->next;
+	node->next->prev = list->head;
+	list->head->next = node->next;
+	last = list->tail->prev;
+	node->prev = list->tail->prev;
+	node->next = list->tail;	
+	list->tail->prev->next = node;
+	list->tail->prev = node;
+	
+	return last;
+}
+
 struct dnode_s *dlist_insert(struct dlist_s *list, struct dnode_s *prevnode, void *val)
 {
 	struct dnode_s *node;
@@ -381,11 +516,11 @@ struct dnode_s *dlist_insert(struct dlist_s *list, struct dnode_s *prevnode, voi
 	return node;	
 }
 
-struct dnode_s *dlist_remove(struct dlist_s *list, struct dnode_s *node)
+void *dlist_remove(struct dlist_s *list, struct dnode_s *node)
 {
 	void *val;
 	
-	if (node->prev == 0 || node->next == 0 || node == 0)
+	if (node == list->head || node == list->tail)
 		return 0;
 	
 	val = node->data;
