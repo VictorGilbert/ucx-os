@@ -96,3 +96,4 @@ void _context_init(jmp_buf *ctx, size_t sp, size_t ss, size_t ra);
 #define DEFAULT_STACK_SIZE	2048
 
 void _interrupt_tick(void);
+void _hardware_init(void);
