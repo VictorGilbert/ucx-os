@@ -93,7 +93,7 @@ console.o: $(SRC_DIR)/lib/console.c
 ## kernel + application link
 link:
 ifeq ('$(ARCH)', 'arm/armv7')
-	$(CC) --run_linker $(LDFLAGS) $(BUILD_APP_DIR)/*.o $(BUILD_KERNEL_DIR)/*.o --output_file=app.out --no_warnings --library=${PATH_TO_TI_DIR}/compiler/ti-cgt-arm_20.2.7.LTS/lib/libc.a --library=./arch/arm/armv7/drivers/source/HL_sys_link.cmd
+	$(CC) --run_linker $(LDFLAGS) $(BUILD_APP_DIR)/*.o $(BUILD_KERNEL_DIR)/*.o --output_file=app.out --no_warnings --library=${PATH_TO_TI_DIR}/compiler/ti-cgt-arm_20.2.7.LTS/lib/libc.a --library=./arch/arm/armv7/drivers/linker.cmd
 else
 	ifeq ('$(ARCH)', 'avr/atmega32')
 		$(LD) $(LDFLAGS) -o $(BUILD_TARGET_DIR)/image.elf $(BUILD_APP_DIR)/*.o -L$(BUILD_TARGET_DIR) -lucxos
