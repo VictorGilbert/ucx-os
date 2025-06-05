@@ -91,9 +91,17 @@ console.o: $(SRC_DIR)/lib/console.c
 	$(CC) $(CFLAGS) $(SRC_DIR)/lib/console.c
 		
 ## kernel + application link
+# LIB_FILES = ${PATH_TO_TI_DIR}/ti-cgt-arm_20.2.7.LTS/lib/rtsv7R4_A_be_v3D16_eabi.lib ${PATH_TO_TI_DIR}/ti-cgt-arm_20.2.7.LTS/lib/rtsv7R4_A_be_v3D16_eabi.lib ${PATH_TO_TI_DIR}/ti-cgt-arm_20.2.7.LTS/lib/rtsv7R4_A_le_v3D16_eabi.lib ${PATH_TO_TI_DIR}/ti-cgt-arm_20.2.7.LTS/lib/rtsv7R4_T_be_eabi.lib ${PATH_TO_TI_DIR}/ti-cgt-arm_20.2.7.LTS/lib/rtsv7R4_T_be_v3D16_eabi.lib ${PATH_TO_TI_DIR}/ti-cgt-arm_20.2.7.LTS/lib/rtsv7R4_T_le_v3D16_eabi.lib
+
+
+
+# ${PATH_TO_TI_DIR}/ti-cgt-arm_20.2.7.LTS/lib/rtsv7R4_A_le_v3D16_eabi.lib
+
+
+# link:--library=${PATH_TO_TI_DIR}/ti-cgt-arm_20.2.7.LTS/lib/libc.a
 link:
 ifeq ('$(ARCH)', 'arm/armv7')
-	$(CC) --run_linker $(LDFLAGS) $(BUILD_APP_DIR)/*.o $(BUILD_KERNEL_DIR)/*.o --output_file=app.out --no_warnings --library=${PATH_TO_TI_DIR}/compiler/ti-cgt-arm_20.2.7.LTS/lib/libc.a --library=./arch/arm/armv7/drivers/linker.cmd
+	$(CC) --run_linker $(LDFLAGS) $(BUILD_APP_DIR)/*.o $(BUILD_KERNEL_DIR)/*.o --output_file=app.out --no_warnings  --library=${PATH_TO_TI_DIR}/ti-cgt-arm_20.2.7.LTS/lib/libc.a --library=./arch/arm/armv7/drivers/linker.cmd --map_file=app.map
 else
 	ifeq ('$(ARCH)', 'avr/atmega32')
 		$(LD) $(LDFLAGS) -o $(BUILD_TARGET_DIR)/image.elf $(BUILD_APP_DIR)/*.o -L$(BUILD_TARGET_DIR) -lucxos

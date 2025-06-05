@@ -1,0 +1,655 @@
+find './build/app' './build/kernel' -type f -name '*.o' -delete
+find './build/target' -type f -name '*.o' -delete -o -name '*~' \
+	-delete -o -name 'image.*' -delete -o -name 'code.*' -delete
+find '.' -type f -name '*.o' -delete
+echo "ARCH = none" > ./build/target/target.mak
+find './build/target' -type f -name '*.a' -delete
+/home/victorgilbert/ti/compiler/ti-cgt-arm_20.2.7.LTS/bin/armcl -mv7R5 --code_state=32 --float_support=VFPv3D16 -Ooff -c --opt_for_speed=0 -g --c99 --diag_warning=225 --diag_wrap=off --display_error_number --enum_type=packed --abi=eabi -I ./arch/arm/armv7/include -I ./arch/arm/armv7/include/arch -I ./include/kernel -I ./include/libpok_legacy/ -I ./arch/arm/armv7/drivers/include -I ./arch/arm/armv7/boards/armv7/include -I ./arch/arm/armv7/boards/armv7/include/bsp/ -I ./drivers/bus/include/ -I /home/victorgilbert/ti/compiler/ti-cgt-arm_20.2.7.LTS/lib/src -I /home/victorgilbert/ti/compiler/ti-cgt-arm_20.2.7.LTS/lib/src/machine -I ./arch/arm/armv7/common  -I ./include -I ./include/lib -I ./drivers/bus/include -I ./drivers/device/include -I ./arch/common -Wall -O2 -c  -mmcu=armv7  -fverbose-asm -ffreestanding  -D F_CPU=10000000 -D USART_BAUD=19200 -DF_TIMER=100 -D UNKNOWN_HEAP -D LOW_MEM -Ooff  -D__VER__=\"0.97\"  -o ./arch/arm/armv7/boards/armv7/*.c
+>> WARNING: invalid compiler option --Wall (ignored)
+>> WARNING: invalid compiler option -mmcu=armv7 (ignored)
+>> WARNING: invalid compiler option -fverbose-asm (ignored)
+[bsp.c]
+"./include/kernel/errno.h", line 133: warning #1-D: last line of file ends without a newline
+"./include/kernel/errno.h", line 133: warning #1-D: last line of file ends without a newline
+"./arch/arm/armv7/include/libpok_legacy/errno.h", line 44: warning #1-D: last line of file ends without a newline
+"./arch/arm/armv7/include/libpok_legacy/partition_types.h", line 33: warning #1-D: last line of file ends without a newline
+"./arch/arm/armv7/include/libpok_legacy/syscall_map_arinc.h", line 94: warning #225-D: function "pok_syscall4" declared implicitly
+"./arch/arm/armv7/include/libpok_legacy/syscall_map_arinc.h", line 106: warning #225-D: function "pok_syscall1" declared implicitly
+"./arch/arm/armv7/include/libpok_legacy/syscall_map_arinc.h", line 124: warning #225-D: function "pok_syscall0" declared implicitly
+"./arch/arm/armv7/include/libpok_legacy/syscall_map_arinc.h", line 144: warning #225-D: function "pok_syscall4" declared implicitly
+"./arch/arm/armv7/include/libpok_legacy/syscall_map_arinc.h", line 156: warning #225-D: function "pok_syscall2" declared implicitly
+"./arch/arm/armv7/include/libpok_legacy/syscall_map_arinc.h", line 166: warning #225-D: function "pok_syscall2" declared implicitly
+"./arch/arm/armv7/include/libpok_legacy/syscall_map_arinc.h", line 175: warning #225-D: function "pok_syscall1" declared implicitly
+"./arch/arm/armv7/include/libpok_legacy/syscall_map_arinc.h", line 183: warning #225-D: function "pok_syscall1" declared implicitly
+"./arch/arm/armv7/include/libpok_legacy/syscall_map_arinc.h", line 191: warning #225-D: function "pok_syscall0" declared implicitly
+"./arch/arm/armv7/include/libpok_legacy/syscall_map_arinc.h", line 198: warning #225-D: function "pok_syscall1" declared implicitly
+"./arch/arm/armv7/include/libpok_legacy/syscall_map_arinc.h", line 206: warning #225-D: function "pok_syscall1" declared implicitly
+"./arch/arm/armv7/include/libpok_legacy/syscall_map_arinc.h", line 214: warning #225-D: function "pok_syscall0" declared implicitly
+"./arch/arm/armv7/include/libpok_legacy/syscall_map_arinc.h", line 222: warning #225-D: function "pok_syscall2" declared implicitly
+"./arch/arm/armv7/include/libpok_legacy/syscall_map_arinc.h", line 232: warning #225-D: function "pok_syscall0" declared implicitly
+"./arch/arm/armv7/include/libpok_legacy/syscall_map_arinc.h", line 237: warning #233-D: declaration is not visible outside of function
+"./arch/arm/armv7/include/libpok_legacy/syscall_map_arinc.h", line 239: warning #225-D: function "pok_syscall1" declared implicitly
+"./arch/arm/armv7/include/libpok_legacy/syscall_map_arinc.h", line 245: warning #233-D: declaration is not visible outside of function
+"./arch/arm/armv7/include/libpok_legacy/syscall_map_arinc.h", line 248: warning #225-D: function "pok_syscall2" declared implicitly
+"./arch/arm/armv7/include/libpok_legacy/syscall_map_arinc.h", line 255: warning #233-D: declaration is not visible outside of function
+"./arch/arm/armv7/include/libpok_legacy/syscall_map_arinc.h", line 258: warning #225-D: function "pok_syscall2" declared implicitly
+"./arch/arm/armv7/include/libpok_legacy/syscall_map_arinc.h", line 265: warning #233-D: declaration is not visible outside of function
+"./arch/arm/armv7/include/libpok_legacy/syscall_map_arinc.h", line 266: warning #233-D: declaration is not visible outside of function
+"./arch/arm/armv7/include/libpok_legacy/syscall_map_arinc.h", line 269: warning #225-D: function "pok_syscall3" declared implicitly
+"./arch/arm/armv7/include/libpok_legacy/syscall_map_arinc.h", line 277: warning #233-D: declaration is not visible outside of function
+"./arch/arm/armv7/include/libpok_legacy/syscall_map_arinc.h", line 278: warning #233-D: declaration is not visible outside of function
+"./arch/arm/armv7/include/libpok_legacy/syscall_map_arinc.h", line 281: warning #225-D: function "pok_syscall3" declared implicitly
+"./arch/arm/armv7/include/libpok_legacy/syscall_map_arinc.h", line 293: warning #225-D: function "pok_syscall1" declared implicitly
+"./arch/arm/armv7/include/libpok_legacy/syscall_map_arinc.h", line 301: warning #225-D: function "pok_syscall1" declared implicitly
+"./arch/arm/armv7/include/libpok_legacy/syscall_map_arinc.h", line 309: warning #225-D: function "pok_syscall1" declared implicitly
+"./arch/arm/armv7/include/libpok_legacy/syscall_map_arinc.h", line 317: warning #225-D: function "pok_syscall1" declared implicitly
+"./arch/arm/armv7/include/libpok_legacy/syscall_map_arinc.h", line 360: warning #225-D: function "pok_syscall2" declared implicitly
+"./arch/arm/armv7/include/libpok_legacy/syscall_map_arinc.h", line 516: warning #225-D: function "pok_syscall2" declared implicitly
+"./arch/arm/armv7/include/hal.h", line 99: warning #1-D: last line of file ends without a newline
+"./include/lib/libc.h", line 3: warning #48-D: incompatible redefinition of macro "NULL" (declared at line 51 of "./arch/arm/armv7/boards/armv7/include/stddef.h")
+[cons.c]
+"./include/kernel/errno.h", line 133: warning #1-D: last line of file ends without a newline
+"./arch/arm/armv7/include/hal.h", line 99: warning #1-D: last line of file ends without a newline
+"./include/lib/libc.h", line 3: warning #48-D: incompatible redefinition of macro "NULL" (declared at line 51 of "./arch/arm/armv7/boards/armv7/include/stddef.h")
+"./include/kernel/errno.h", line 133: warning #1-D: last line of file ends without a newline
+"./arch/arm/armv7/include/hal.h", line 60: warning #303-D: typedef name has already been declared (with same type)
+"./arch/arm/armv7/include/hal.h", line 99: warning #1-D: last line of file ends without a newline
+"./arch/arm/armv7/boards/armv7/cons.c", line 117: warning #179-D: function "iostream_get_default" was declared but never referenced
+[rti.c]
+"./include/kernel/errno.h", line 133: warning #1-D: last line of file ends without a newline
+[serial.c]
+[vim.c]
+/home/victorgilbert/ti/compiler/ti-cgt-arm_20.2.7.LTS/bin/armcl -mv7R5 --code_state=32 --float_support=VFPv3D16 -Ooff -c --opt_for_speed=0 -g --c99 --diag_warning=225 --diag_wrap=off --display_error_number --enum_type=packed --abi=eabi -I ./arch/arm/armv7/include -I ./arch/arm/armv7/include/arch -I ./include/kernel -I ./include/libpok_legacy/ -I ./arch/arm/armv7/drivers/include -I ./arch/arm/armv7/boards/armv7/include -I ./arch/arm/armv7/boards/armv7/include/bsp/ -I ./drivers/bus/include/ -I /home/victorgilbert/ti/compiler/ti-cgt-arm_20.2.7.LTS/lib/src -I /home/victorgilbert/ti/compiler/ti-cgt-arm_20.2.7.LTS/lib/src/machine -I ./arch/arm/armv7/common  -I ./include -I ./include/lib -I ./drivers/bus/include -I ./drivers/device/include -I ./arch/common -Wall -O2 -c  -mmcu=armv7  -fverbose-asm -ffreestanding  -D F_CPU=10000000 -D USART_BAUD=19200 -DF_TIMER=100 -D UNKNOWN_HEAP -D LOW_MEM -Ooff  -D__VER__=\"0.97\"  -o ./arch/arm/armv7/drivers/source/*.c
+>> WARNING: invalid compiler option --Wall (ignored)
+>> WARNING: invalid compiler option -mmcu=armv7 (ignored)
+>> WARNING: invalid compiler option -fverbose-asm (ignored)
+[HL_adc.c]
+"./arch/arm/armv7/boards/armv7/include/stdbool.h", line 13: warning #1-D: last line of file ends without a newline
+[HL_can.c]
+"./arch/arm/armv7/boards/armv7/include/stdbool.h", line 13: warning #1-D: last line of file ends without a newline
+[HL_crc.c]
+"./arch/arm/armv7/boards/armv7/include/stdbool.h", line 13: warning #1-D: last line of file ends without a newline
+[HL_dcc.c]
+"./arch/arm/armv7/boards/armv7/include/stdbool.h", line 13: warning #1-D: last line of file ends without a newline
+[HL_ecap.c]
+"./arch/arm/armv7/boards/armv7/include/stdbool.h", line 13: warning #1-D: last line of file ends without a newline
+[HL_emac.c]
+"./arch/arm/armv7/boards/armv7/include/stdbool.h", line 13: warning #1-D: last line of file ends without a newline
+[HL_emif.c]
+"./arch/arm/armv7/boards/armv7/include/stdbool.h", line 13: warning #1-D: last line of file ends without a newline
+[HL_epc.c]
+"./arch/arm/armv7/boards/armv7/include/stdbool.h", line 13: warning #1-D: last line of file ends without a newline
+[HL_eqep.c]
+"./arch/arm/armv7/boards/armv7/include/stdbool.h", line 13: warning #1-D: last line of file ends without a newline
+[HL_errata.c]
+"./arch/arm/armv7/boards/armv7/include/stdbool.h", line 13: warning #1-D: last line of file ends without a newline
+[HL_errata_SSWF021_45.c]
+[HL_esm.c]
+"./arch/arm/armv7/boards/armv7/include/stdbool.h", line 13: warning #1-D: last line of file ends without a newline
+[HL_etpwm.c]
+"./arch/arm/armv7/boards/armv7/include/stdbool.h", line 13: warning #1-D: last line of file ends without a newline
+[HL_gio.c]
+"./arch/arm/armv7/boards/armv7/include/stdbool.h", line 13: warning #1-D: last line of file ends without a newline
+[HL_het.c]
+"./arch/arm/armv7/boards/armv7/include/stdbool.h", line 13: warning #1-D: last line of file ends without a newline
+[HL_i2c.c]
+"./arch/arm/armv7/boards/armv7/include/stdbool.h", line 13: warning #1-D: last line of file ends without a newline
+[HL_lin.c]
+"./arch/arm/armv7/boards/armv7/include/stdbool.h", line 13: warning #1-D: last line of file ends without a newline
+[HL_mdio.c]
+"./arch/arm/armv7/boards/armv7/include/stdbool.h", line 13: warning #1-D: last line of file ends without a newline
+[HL_mibspi.c]
+"./arch/arm/armv7/boards/armv7/include/stdbool.h", line 13: warning #1-D: last line of file ends without a newline
+[HL_nmpu.c]
+"./arch/arm/armv7/boards/armv7/include/stdbool.h", line 13: warning #1-D: last line of file ends without a newline
+[HL_notification.c]
+"./arch/arm/armv7/boards/armv7/include/stdbool.h", line 13: warning #1-D: last line of file ends without a newline
+[HL_phy_dp83640.c]
+"./arch/arm/armv7/boards/armv7/include/stdbool.h", line 13: warning #1-D: last line of file ends without a newline
+[HL_phy_tlk111.c]
+"./arch/arm/armv7/boards/armv7/include/stdbool.h", line 13: warning #1-D: last line of file ends without a newline
+[HL_pinmux.c]
+"./arch/arm/armv7/boards/armv7/include/stdbool.h", line 13: warning #1-D: last line of file ends without a newline
+[HL_pom.c]
+"./arch/arm/armv7/boards/armv7/include/stdbool.h", line 13: warning #1-D: last line of file ends without a newline
+[HL_rti.c]
+"./arch/arm/armv7/boards/armv7/include/stdbool.h", line 13: warning #1-D: last line of file ends without a newline
+[HL_sci.c]
+"./arch/arm/armv7/boards/armv7/include/stdbool.h", line 13: warning #1-D: last line of file ends without a newline
+[HL_sys_dma.c]
+"./arch/arm/armv7/boards/armv7/include/stdbool.h", line 13: warning #1-D: last line of file ends without a newline
+[HL_sys_main.c]
+"./arch/arm/armv7/boards/armv7/include/stdbool.h", line 13: warning #1-D: last line of file ends without a newline
+[HL_sys_pcr.c]
+"./arch/arm/armv7/boards/armv7/include/stdbool.h", line 13: warning #1-D: last line of file ends without a newline
+[HL_sys_phantom.c]
+"./arch/arm/armv7/boards/armv7/include/stdbool.h", line 13: warning #1-D: last line of file ends without a newline
+[HL_sys_pmm.c]
+"./arch/arm/armv7/boards/armv7/include/stdbool.h", line 13: warning #1-D: last line of file ends without a newline
+[HL_sys_startup.c]
+"./arch/arm/armv7/boards/armv7/include/stdbool.h", line 13: warning #1-D: last line of file ends without a newline
+"./arch/arm/armv7/drivers/source/HL_sys_startup.c", line 124: warning #225-D: function "_system_post_cinit" declared implicitly
+"./arch/arm/armv7/drivers/source/HL_sys_startup.c", line 91: warning #1111-D: pragma CODE_STATE can only be applied to a function definition, not "_c_int00" (declared at line 86)
+[HL_sys_vim.c]
+"./arch/arm/armv7/boards/armv7/include/stdbool.h", line 13: warning #1-D: last line of file ends without a newline
+[HL_system.c]
+"./arch/arm/armv7/boards/armv7/include/stdbool.h", line 13: warning #1-D: last line of file ends without a newline
+/home/victorgilbert/ti/compiler/ti-cgt-arm_20.2.7.LTS/bin/armcl -mv7R5 --code_state=32 --float_support=VFPv3D16 -Ooff -c --opt_for_speed=0 -g --c99 --diag_warning=225 --diag_wrap=off --display_error_number --enum_type=packed --abi=eabi -I ./arch/arm/armv7/include -I ./arch/arm/armv7/include/arch -I ./include/kernel -I ./include/libpok_legacy/ -I ./arch/arm/armv7/drivers/include -I ./arch/arm/armv7/boards/armv7/include -I ./arch/arm/armv7/boards/armv7/include/bsp/ -I ./drivers/bus/include/ -I /home/victorgilbert/ti/compiler/ti-cgt-arm_20.2.7.LTS/lib/src -I /home/victorgilbert/ti/compiler/ti-cgt-arm_20.2.7.LTS/lib/src/machine -I ./arch/arm/armv7/common  -I ./include -I ./include/lib -I ./drivers/bus/include -I ./drivers/device/include -I ./arch/common -Wall -O2 -c  -mmcu=armv7  -fverbose-asm -ffreestanding  -D F_CPU=10000000 -D USART_BAUD=19200 -DF_TIMER=100 -D UNKNOWN_HEAP -D LOW_MEM -Ooff  -D__VER__=\"0.97\"  -o -i"/home/victorgilbert/ti/compiler/ti-cgt-arm_20.2.7.LTS/lib" -Ooff/src/*.c
+>> WARNING: invalid compiler option --Wall (ignored)
+>> WARNING: invalid compiler option -mmcu=armv7 (ignored)
+>> WARNING: invalid compiler option -fverbose-asm (ignored)
+error #24015-D: bad argument to option -O: should be one of {off,0,1,2,3,4}
+make: *** [arch/arm/armv7/arch.mak:51: hal] Error 1
+/home/victorgilbert/ti/compiler/ti-cgt-arm_20.2.7.LTS/bin/armcl -mv7R5 --code_state=32 --float_support=VFPv3D16 -Ooff -c --opt_for_speed=0 -g --c99 --diag_warning=225 --diag_wrap=off --display_error_number --enum_type=packed --abi=eabi -I ./arch/arm/armv7/include -I ./arch/arm/armv7/include/arch -I ./include/kernel -I ./include/libpok_legacy/ -I ./arch/arm/armv7/drivers/include -I ./arch/arm/armv7/boards/armv7/include -I ./arch/arm/armv7/boards/armv7/include/bsp/ -I ./drivers/bus/include/ -I /home/victorgilbert/ti/compiler/ti-cgt-arm_20.2.7.LTS/lib/src -I /home/victorgilbert/ti/compiler/ti-cgt-arm_20.2.7.LTS/lib/src/machine -I ./arch/arm/armv7/common  -I ./include -I ./include/lib -I ./drivers/bus/include -I ./drivers/device/include -I ./arch/common -Wall -O2 -c  -mmcu=armv7  -fverbose-asm -ffreestanding  -D F_CPU=10000000 -D USART_BAUD=19200 -DF_TIMER=100 -D UNKNOWN_HEAP -D LOW_MEM -Ooff  -D__VER__=\"0.97\"  ./lib/console.c
+>> WARNING: invalid compiler option --Wall (ignored)
+>> WARNING: invalid compiler option -mmcu=armv7 (ignored)
+>> WARNING: invalid compiler option -fverbose-asm (ignored)
+"./arch/arm/armv7/include/hal.h", line 99: warning #1-D: last line of file ends without a newline
+"./arch/arm/armv7/include/hal.h", line 60: warning #303-D: typedef name has already been declared (with same type)
+"./arch/arm/armv7/include/hal.h", line 99: warning #1-D: last line of file ends without a newline
+"./include/lib/libc.h", line 3: warning #48-D: incompatible redefinition of macro "NULL" (declared at line 51 of "./arch/arm/armv7/boards/armv7/include/stddef.h")
+"./include/kernel/timer.h", line 20: warning #48-D: incompatible redefinition of macro "F_TIMER"
+"./include/kernel/errno.h", line 133: warning #1-D: last line of file ends without a newline
+/home/victorgilbert/ti/compiler/ti-cgt-arm_20.2.7.LTS/bin/armcl -mv7R5 --code_state=32 --float_support=VFPv3D16 -Ooff -c --opt_for_speed=0 -g --c99 --diag_warning=225 --diag_wrap=off --display_error_number --enum_type=packed --abi=eabi -I ./arch/arm/armv7/include -I ./arch/arm/armv7/include/arch -I ./include/kernel -I ./include/libpok_legacy/ -I ./arch/arm/armv7/drivers/include -I ./arch/arm/armv7/boards/armv7/include -I ./arch/arm/armv7/boards/armv7/include/bsp/ -I ./drivers/bus/include/ -I /home/victorgilbert/ti/compiler/ti-cgt-arm_20.2.7.LTS/lib/src -I /home/victorgilbert/ti/compiler/ti-cgt-arm_20.2.7.LTS/lib/src/machine -I ./arch/arm/armv7/common  -I ./include -I ./include/lib -I ./drivers/bus/include -I ./drivers/device/include -I ./arch/common -Wall -O2 -c  -mmcu=armv7  -fverbose-asm -ffreestanding  -D F_CPU=10000000 -D USART_BAUD=19200 -DF_TIMER=100 -D UNKNOWN_HEAP -D LOW_MEM -Ooff  -D__VER__=\"0.97\"  ./lib/libc.c
+>> WARNING: invalid compiler option --Wall (ignored)
+>> WARNING: invalid compiler option -mmcu=armv7 (ignored)
+>> WARNING: invalid compiler option -fverbose-asm (ignored)
+"./arch/arm/armv7/include/hal.h", line 99: warning #1-D: last line of file ends without a newline
+"./arch/arm/armv7/include/hal.h", line 60: warning #303-D: typedef name has already been declared (with same type)
+"./arch/arm/armv7/include/hal.h", line 99: warning #1-D: last line of file ends without a newline
+"./include/lib/libc.h", line 3: warning #48-D: incompatible redefinition of macro "NULL" (declared at line 51 of "./arch/arm/armv7/boards/armv7/include/stddef.h")
+"./include/kernel/timer.h", line 20: warning #48-D: incompatible redefinition of macro "F_TIMER"
+"./include/kernel/errno.h", line 133: warning #1-D: last line of file ends without a newline
+/home/victorgilbert/ti/compiler/ti-cgt-arm_20.2.7.LTS/bin/armcl -mv7R5 --code_state=32 --float_support=VFPv3D16 -Ooff -c --opt_for_speed=0 -g --c99 --diag_warning=225 --diag_wrap=off --display_error_number --enum_type=packed --abi=eabi -I ./arch/arm/armv7/include -I ./arch/arm/armv7/include/arch -I ./include/kernel -I ./include/libpok_legacy/ -I ./arch/arm/armv7/drivers/include -I ./arch/arm/armv7/boards/armv7/include -I ./arch/arm/armv7/boards/armv7/include/bsp/ -I ./drivers/bus/include/ -I /home/victorgilbert/ti/compiler/ti-cgt-arm_20.2.7.LTS/lib/src -I /home/victorgilbert/ti/compiler/ti-cgt-arm_20.2.7.LTS/lib/src/machine -I ./arch/arm/armv7/common  -I ./include -I ./include/lib -I ./drivers/bus/include -I ./drivers/device/include -I ./arch/common -Wall -O2 -c  -mmcu=armv7  -fverbose-asm -ffreestanding  -D F_CPU=10000000 -D USART_BAUD=19200 -DF_TIMER=100 -D UNKNOWN_HEAP -D LOW_MEM -Ooff  -D__VER__=\"0.97\"  ./lib/dump.c
+>> WARNING: invalid compiler option --Wall (ignored)
+>> WARNING: invalid compiler option -mmcu=armv7 (ignored)
+>> WARNING: invalid compiler option -fverbose-asm (ignored)
+"./arch/arm/armv7/include/hal.h", line 99: warning #1-D: last line of file ends without a newline
+"./arch/arm/armv7/include/hal.h", line 60: warning #303-D: typedef name has already been declared (with same type)
+"./arch/arm/armv7/include/hal.h", line 99: warning #1-D: last line of file ends without a newline
+"./include/lib/libc.h", line 3: warning #48-D: incompatible redefinition of macro "NULL" (declared at line 51 of "./arch/arm/armv7/boards/armv7/include/stddef.h")
+"./include/kernel/timer.h", line 20: warning #48-D: incompatible redefinition of macro "F_TIMER"
+"./include/kernel/errno.h", line 133: warning #1-D: last line of file ends without a newline
+/home/victorgilbert/ti/compiler/ti-cgt-arm_20.2.7.LTS/bin/armcl -mv7R5 --code_state=32 --float_support=VFPv3D16 -Ooff -c --opt_for_speed=0 -g --c99 --diag_warning=225 --diag_wrap=off --display_error_number --enum_type=packed --abi=eabi -I ./arch/arm/armv7/include -I ./arch/arm/armv7/include/arch -I ./include/kernel -I ./include/libpok_legacy/ -I ./arch/arm/armv7/drivers/include -I ./arch/arm/armv7/boards/armv7/include -I ./arch/arm/armv7/boards/armv7/include/bsp/ -I ./drivers/bus/include/ -I /home/victorgilbert/ti/compiler/ti-cgt-arm_20.2.7.LTS/lib/src -I /home/victorgilbert/ti/compiler/ti-cgt-arm_20.2.7.LTS/lib/src/machine -I ./arch/arm/armv7/common  -I ./include -I ./include/lib -I ./drivers/bus/include -I ./drivers/device/include -I ./arch/common -Wall -O2 -c  -mmcu=armv7  -fverbose-asm -ffreestanding  -D F_CPU=10000000 -D USART_BAUD=19200 -DF_TIMER=100 -D UNKNOWN_HEAP -D LOW_MEM -Ooff  -D__VER__=\"0.97\"  ./lib/malloc.c
+>> WARNING: invalid compiler option --Wall (ignored)
+>> WARNING: invalid compiler option -mmcu=armv7 (ignored)
+>> WARNING: invalid compiler option -fverbose-asm (ignored)
+"./arch/arm/armv7/include/hal.h", line 99: warning #1-D: last line of file ends without a newline
+"./arch/arm/armv7/include/hal.h", line 60: warning #303-D: typedef name has already been declared (with same type)
+"./arch/arm/armv7/include/hal.h", line 99: warning #1-D: last line of file ends without a newline
+"./include/lib/libc.h", line 3: warning #48-D: incompatible redefinition of macro "NULL" (declared at line 51 of "./arch/arm/armv7/boards/armv7/include/stddef.h")
+"./include/kernel/timer.h", line 20: warning #48-D: incompatible redefinition of macro "F_TIMER"
+"./include/kernel/errno.h", line 133: warning #1-D: last line of file ends without a newline
+"./lib/malloc.c", line 135: warning #225-D: function "_disable_interrupt_" declared implicitly
+"./lib/malloc.c", line 152: warning #225-D: function "_disable_interrupt_" declared implicitly
+/home/victorgilbert/ti/compiler/ti-cgt-arm_20.2.7.LTS/bin/armcl -mv7R5 --code_state=32 --float_support=VFPv3D16 -Ooff -c --opt_for_speed=0 -g --c99 --diag_warning=225 --diag_wrap=off --display_error_number --enum_type=packed --abi=eabi -I ./arch/arm/armv7/include -I ./arch/arm/armv7/include/arch -I ./include/kernel -I ./include/libpok_legacy/ -I ./arch/arm/armv7/drivers/include -I ./arch/arm/armv7/boards/armv7/include -I ./arch/arm/armv7/boards/armv7/include/bsp/ -I ./drivers/bus/include/ -I /home/victorgilbert/ti/compiler/ti-cgt-arm_20.2.7.LTS/lib/src -I /home/victorgilbert/ti/compiler/ti-cgt-arm_20.2.7.LTS/lib/src/machine -I ./arch/arm/armv7/common  -I ./include -I ./include/lib -I ./drivers/bus/include -I ./drivers/device/include -I ./arch/common -Wall -O2 -c  -mmcu=armv7  -fverbose-asm -ffreestanding  -D F_CPU=10000000 -D USART_BAUD=19200 -DF_TIMER=100 -D UNKNOWN_HEAP -D LOW_MEM -Ooff  -D__VER__=\"0.97\"  ./lib/list.c
+>> WARNING: invalid compiler option --Wall (ignored)
+>> WARNING: invalid compiler option -mmcu=armv7 (ignored)
+>> WARNING: invalid compiler option -fverbose-asm (ignored)
+"./arch/arm/armv7/include/hal.h", line 99: warning #1-D: last line of file ends without a newline
+"./arch/arm/armv7/include/hal.h", line 60: warning #303-D: typedef name has already been declared (with same type)
+"./arch/arm/armv7/include/hal.h", line 99: warning #1-D: last line of file ends without a newline
+"./include/lib/libc.h", line 3: warning #48-D: incompatible redefinition of macro "NULL" (declared at line 51 of "./arch/arm/armv7/boards/armv7/include/stddef.h")
+"./include/kernel/timer.h", line 20: warning #48-D: incompatible redefinition of macro "F_TIMER"
+"./include/kernel/errno.h", line 133: warning #1-D: last line of file ends without a newline
+/home/victorgilbert/ti/compiler/ti-cgt-arm_20.2.7.LTS/bin/armcl -mv7R5 --code_state=32 --float_support=VFPv3D16 -Ooff -c --opt_for_speed=0 -g --c99 --diag_warning=225 --diag_wrap=off --display_error_number --enum_type=packed --abi=eabi -I ./arch/arm/armv7/include -I ./arch/arm/armv7/include/arch -I ./include/kernel -I ./include/libpok_legacy/ -I ./arch/arm/armv7/drivers/include -I ./arch/arm/armv7/boards/armv7/include -I ./arch/arm/armv7/boards/armv7/include/bsp/ -I ./drivers/bus/include/ -I /home/victorgilbert/ti/compiler/ti-cgt-arm_20.2.7.LTS/lib/src -I /home/victorgilbert/ti/compiler/ti-cgt-arm_20.2.7.LTS/lib/src/machine -I ./arch/arm/armv7/common  -I ./include -I ./include/lib -I ./drivers/bus/include -I ./drivers/device/include -I ./arch/common -Wall -O2 -c  -mmcu=armv7  -fverbose-asm -ffreestanding  -D F_CPU=10000000 -D USART_BAUD=19200 -DF_TIMER=100 -D UNKNOWN_HEAP -D LOW_MEM -Ooff  -D__VER__=\"0.97\"  ./lib/queue.c
+>> WARNING: invalid compiler option --Wall (ignored)
+>> WARNING: invalid compiler option -mmcu=armv7 (ignored)
+>> WARNING: invalid compiler option -fverbose-asm (ignored)
+"./arch/arm/armv7/include/hal.h", line 99: warning #1-D: last line of file ends without a newline
+"./arch/arm/armv7/include/hal.h", line 60: warning #303-D: typedef name has already been declared (with same type)
+"./arch/arm/armv7/include/hal.h", line 99: warning #1-D: last line of file ends without a newline
+"./include/lib/libc.h", line 3: warning #48-D: incompatible redefinition of macro "NULL" (declared at line 51 of "./arch/arm/armv7/boards/armv7/include/stddef.h")
+"./include/kernel/timer.h", line 20: warning #48-D: incompatible redefinition of macro "F_TIMER"
+"./include/kernel/errno.h", line 133: warning #1-D: last line of file ends without a newline
+make: Nothing to be done for 'drivers'.
+/home/victorgilbert/ti/compiler/ti-cgt-arm_20.2.7.LTS/bin/armcl -mv7R5 --code_state=32 --float_support=VFPv3D16 -Ooff -c --opt_for_speed=0 -g --c99 --diag_warning=225 --diag_wrap=off --display_error_number --enum_type=packed --abi=eabi -I ./arch/arm/armv7/include -I ./arch/arm/armv7/include/arch -I ./include/kernel -I ./include/libpok_legacy/ -I ./arch/arm/armv7/drivers/include -I ./arch/arm/armv7/boards/armv7/include -I ./arch/arm/armv7/boards/armv7/include/bsp/ -I ./drivers/bus/include/ -I /home/victorgilbert/ti/compiler/ti-cgt-arm_20.2.7.LTS/lib/src -I /home/victorgilbert/ti/compiler/ti-cgt-arm_20.2.7.LTS/lib/src/machine -I ./arch/arm/armv7/common  -I ./include -I ./include/lib -I ./drivers/bus/include -I ./drivers/device/include -I ./arch/common -Wall -O2 -c  -mmcu=armv7  -fverbose-asm -ffreestanding  -D F_CPU=10000000 -D USART_BAUD=19200 -DF_TIMER=100 -D UNKNOWN_HEAP -D LOW_MEM -Ooff  -D__VER__=\"0.97\"  ./kernel/timer.c
+>> WARNING: invalid compiler option --Wall (ignored)
+>> WARNING: invalid compiler option -mmcu=armv7 (ignored)
+>> WARNING: invalid compiler option -fverbose-asm (ignored)
+"./arch/arm/armv7/include/hal.h", line 99: warning #1-D: last line of file ends without a newline
+"./arch/arm/armv7/include/hal.h", line 60: warning #303-D: typedef name has already been declared (with same type)
+"./arch/arm/armv7/include/hal.h", line 99: warning #1-D: last line of file ends without a newline
+"./include/lib/libc.h", line 3: warning #48-D: incompatible redefinition of macro "NULL" (declared at line 51 of "./arch/arm/armv7/boards/armv7/include/stddef.h")
+"./include/kernel/timer.h", line 20: warning #48-D: incompatible redefinition of macro "F_TIMER"
+"./include/kernel/errno.h", line 133: warning #1-D: last line of file ends without a newline
+/home/victorgilbert/ti/compiler/ti-cgt-arm_20.2.7.LTS/bin/armcl -mv7R5 --code_state=32 --float_support=VFPv3D16 -Ooff -c --opt_for_speed=0 -g --c99 --diag_warning=225 --diag_wrap=off --display_error_number --enum_type=packed --abi=eabi -I ./arch/arm/armv7/include -I ./arch/arm/armv7/include/arch -I ./include/kernel -I ./include/libpok_legacy/ -I ./arch/arm/armv7/drivers/include -I ./arch/arm/armv7/boards/armv7/include -I ./arch/arm/armv7/boards/armv7/include/bsp/ -I ./drivers/bus/include/ -I /home/victorgilbert/ti/compiler/ti-cgt-arm_20.2.7.LTS/lib/src -I /home/victorgilbert/ti/compiler/ti-cgt-arm_20.2.7.LTS/lib/src/machine -I ./arch/arm/armv7/common  -I ./include -I ./include/lib -I ./drivers/bus/include -I ./drivers/device/include -I ./arch/common -Wall -O2 -c  -mmcu=armv7  -fverbose-asm -ffreestanding  -D F_CPU=10000000 -D USART_BAUD=19200 -DF_TIMER=100 -D UNKNOWN_HEAP -D LOW_MEM -Ooff  -D__VER__=\"0.97\"  ./kernel/message.c
+>> WARNING: invalid compiler option --Wall (ignored)
+>> WARNING: invalid compiler option -mmcu=armv7 (ignored)
+>> WARNING: invalid compiler option -fverbose-asm (ignored)
+"./arch/arm/armv7/include/hal.h", line 99: warning #1-D: last line of file ends without a newline
+"./arch/arm/armv7/include/hal.h", line 60: warning #303-D: typedef name has already been declared (with same type)
+"./arch/arm/armv7/include/hal.h", line 99: warning #1-D: last line of file ends without a newline
+"./include/lib/libc.h", line 3: warning #48-D: incompatible redefinition of macro "NULL" (declared at line 51 of "./arch/arm/armv7/boards/armv7/include/stddef.h")
+"./include/kernel/timer.h", line 20: warning #48-D: incompatible redefinition of macro "F_TIMER"
+"./include/kernel/errno.h", line 133: warning #1-D: last line of file ends without a newline
+"./kernel/message.c", line 33: warning #225-D: function "_disable_interrupt_" declared implicitly
+"./kernel/message.c", line 45: warning #225-D: function "_disable_interrupt_" declared implicitly
+"./kernel/message.c", line 56: warning #225-D: function "_disable_interrupt_" declared implicitly
+"./kernel/message.c", line 67: warning #225-D: function "_disable_interrupt_" declared implicitly
+/home/victorgilbert/ti/compiler/ti-cgt-arm_20.2.7.LTS/bin/armcl -mv7R5 --code_state=32 --float_support=VFPv3D16 -Ooff -c --opt_for_speed=0 -g --c99 --diag_warning=225 --diag_wrap=off --display_error_number --enum_type=packed --abi=eabi -I ./arch/arm/armv7/include -I ./arch/arm/armv7/include/arch -I ./include/kernel -I ./include/libpok_legacy/ -I ./arch/arm/armv7/drivers/include -I ./arch/arm/armv7/boards/armv7/include -I ./arch/arm/armv7/boards/armv7/include/bsp/ -I ./drivers/bus/include/ -I /home/victorgilbert/ti/compiler/ti-cgt-arm_20.2.7.LTS/lib/src -I /home/victorgilbert/ti/compiler/ti-cgt-arm_20.2.7.LTS/lib/src/machine -I ./arch/arm/armv7/common  -I ./include -I ./include/lib -I ./drivers/bus/include -I ./drivers/device/include -I ./arch/common -Wall -O2 -c  -mmcu=armv7  -fverbose-asm -ffreestanding  -D F_CPU=10000000 -D USART_BAUD=19200 -DF_TIMER=100 -D UNKNOWN_HEAP -D LOW_MEM -Ooff  -D__VER__=\"0.97\"  ./kernel/pipe.c
+>> WARNING: invalid compiler option --Wall (ignored)
+>> WARNING: invalid compiler option -mmcu=armv7 (ignored)
+>> WARNING: invalid compiler option -fverbose-asm (ignored)
+"./arch/arm/armv7/include/hal.h", line 99: warning #1-D: last line of file ends without a newline
+"./arch/arm/armv7/include/hal.h", line 60: warning #303-D: typedef name has already been declared (with same type)
+"./arch/arm/armv7/include/hal.h", line 99: warning #1-D: last line of file ends without a newline
+"./include/lib/libc.h", line 3: warning #48-D: incompatible redefinition of macro "NULL" (declared at line 51 of "./arch/arm/armv7/boards/armv7/include/stddef.h")
+"./include/kernel/timer.h", line 20: warning #48-D: incompatible redefinition of macro "F_TIMER"
+"./include/kernel/errno.h", line 133: warning #1-D: last line of file ends without a newline
+"./kernel/pipe.c", line 69: warning #225-D: function "_disable_interrupt_" declared implicitly
+"./kernel/pipe.c", line 118: warning #225-D: function "_disable_interrupt_" declared implicitly
+"./kernel/pipe.c", line 140: warning #225-D: function "_disable_interrupt_" declared implicitly
+"./kernel/pipe.c", line 160: warning #225-D: function "_disable_interrupt_" declared implicitly
+"./kernel/pipe.c", line 182: warning #225-D: function "_disable_interrupt_" declared implicitly
+/home/victorgilbert/ti/compiler/ti-cgt-arm_20.2.7.LTS/bin/armcl -mv7R5 --code_state=32 --float_support=VFPv3D16 -Ooff -c --opt_for_speed=0 -g --c99 --diag_warning=225 --diag_wrap=off --display_error_number --enum_type=packed --abi=eabi -I ./arch/arm/armv7/include -I ./arch/arm/armv7/include/arch -I ./include/kernel -I ./include/libpok_legacy/ -I ./arch/arm/armv7/drivers/include -I ./arch/arm/armv7/boards/armv7/include -I ./arch/arm/armv7/boards/armv7/include/bsp/ -I ./drivers/bus/include/ -I /home/victorgilbert/ti/compiler/ti-cgt-arm_20.2.7.LTS/lib/src -I /home/victorgilbert/ti/compiler/ti-cgt-arm_20.2.7.LTS/lib/src/machine -I ./arch/arm/armv7/common  -I ./include -I ./include/lib -I ./drivers/bus/include -I ./drivers/device/include -I ./arch/common -Wall -O2 -c  -mmcu=armv7  -fverbose-asm -ffreestanding  -D F_CPU=10000000 -D USART_BAUD=19200 -DF_TIMER=100 -D UNKNOWN_HEAP -D LOW_MEM -Ooff  -D__VER__=\"0.97\"  ./kernel/semaphore.c
+>> WARNING: invalid compiler option --Wall (ignored)
+>> WARNING: invalid compiler option -mmcu=armv7 (ignored)
+>> WARNING: invalid compiler option -fverbose-asm (ignored)
+"./arch/arm/armv7/include/hal.h", line 99: warning #1-D: last line of file ends without a newline
+"./arch/arm/armv7/include/hal.h", line 60: warning #303-D: typedef name has already been declared (with same type)
+"./arch/arm/armv7/include/hal.h", line 99: warning #1-D: last line of file ends without a newline
+"./include/lib/libc.h", line 3: warning #48-D: incompatible redefinition of macro "NULL" (declared at line 51 of "./arch/arm/armv7/boards/armv7/include/stddef.h")
+"./include/kernel/timer.h", line 20: warning #48-D: incompatible redefinition of macro "F_TIMER"
+"./include/kernel/errno.h", line 133: warning #1-D: last line of file ends without a newline
+"./kernel/semaphore.c", line 49: warning #225-D: function "_disable_interrupt_" declared implicitly
+"./kernel/semaphore.c", line 55: warning #69-D: integer conversion resulted in a change of sign
+"./kernel/semaphore.c", line 68: warning #225-D: function "_disable_interrupt_" declared implicitly
+"./kernel/semaphore.c", line 73: warning #69-D: integer conversion resulted in a change of sign
+/home/victorgilbert/ti/compiler/ti-cgt-arm_20.2.7.LTS/bin/armcl -mv7R5 --code_state=32 --float_support=VFPv3D16 -Ooff -c --opt_for_speed=0 -g --c99 --diag_warning=225 --diag_wrap=off --display_error_number --enum_type=packed --abi=eabi -I ./arch/arm/armv7/include -I ./arch/arm/armv7/include/arch -I ./include/kernel -I ./include/libpok_legacy/ -I ./arch/arm/armv7/drivers/include -I ./arch/arm/armv7/boards/armv7/include -I ./arch/arm/armv7/boards/armv7/include/bsp/ -I ./drivers/bus/include/ -I /home/victorgilbert/ti/compiler/ti-cgt-arm_20.2.7.LTS/lib/src -I /home/victorgilbert/ti/compiler/ti-cgt-arm_20.2.7.LTS/lib/src/machine -I ./arch/arm/armv7/common  -I ./include -I ./include/lib -I ./drivers/bus/include -I ./drivers/device/include -I ./arch/common -Wall -O2 -c  -mmcu=armv7  -fverbose-asm -ffreestanding  -D F_CPU=10000000 -D USART_BAUD=19200 -DF_TIMER=100 -D UNKNOWN_HEAP -D LOW_MEM -Ooff  -D__VER__=\"0.97\"  ./kernel/ecodes.c
+>> WARNING: invalid compiler option --Wall (ignored)
+>> WARNING: invalid compiler option -mmcu=armv7 (ignored)
+>> WARNING: invalid compiler option -fverbose-asm (ignored)
+"./arch/arm/armv7/include/hal.h", line 99: warning #1-D: last line of file ends without a newline
+"./arch/arm/armv7/include/hal.h", line 60: warning #303-D: typedef name has already been declared (with same type)
+"./arch/arm/armv7/include/hal.h", line 99: warning #1-D: last line of file ends without a newline
+"./include/lib/libc.h", line 3: warning #48-D: incompatible redefinition of macro "NULL" (declared at line 51 of "./arch/arm/armv7/boards/armv7/include/stddef.h")
+"./include/kernel/timer.h", line 20: warning #48-D: incompatible redefinition of macro "F_TIMER"
+"./include/kernel/errno.h", line 133: warning #1-D: last line of file ends without a newline
+/home/victorgilbert/ti/compiler/ti-cgt-arm_20.2.7.LTS/bin/armcl -mv7R5 --code_state=32 --float_support=VFPv3D16 -Ooff -c --opt_for_speed=0 -g --c99 --diag_warning=225 --diag_wrap=off --display_error_number --enum_type=packed --abi=eabi -I ./arch/arm/armv7/include -I ./arch/arm/armv7/include/arch -I ./include/kernel -I ./include/libpok_legacy/ -I ./arch/arm/armv7/drivers/include -I ./arch/arm/armv7/boards/armv7/include -I ./arch/arm/armv7/boards/armv7/include/bsp/ -I ./drivers/bus/include/ -I /home/victorgilbert/ti/compiler/ti-cgt-arm_20.2.7.LTS/lib/src -I /home/victorgilbert/ti/compiler/ti-cgt-arm_20.2.7.LTS/lib/src/machine -I ./arch/arm/armv7/common  -I ./include -I ./include/lib -I ./drivers/bus/include -I ./drivers/device/include -I ./arch/common -Wall -O2 -c  -mmcu=armv7  -fverbose-asm -ffreestanding  -D F_CPU=10000000 -D USART_BAUD=19200 -DF_TIMER=100 -D UNKNOWN_HEAP -D LOW_MEM -Ooff  -D__VER__=\"0.97\"  ./kernel/syscall.c
+>> WARNING: invalid compiler option --Wall (ignored)
+>> WARNING: invalid compiler option -mmcu=armv7 (ignored)
+>> WARNING: invalid compiler option -fverbose-asm (ignored)
+"./arch/arm/armv7/include/hal.h", line 99: warning #1-D: last line of file ends without a newline
+"./arch/arm/armv7/include/hal.h", line 60: warning #303-D: typedef name has already been declared (with same type)
+"./arch/arm/armv7/include/hal.h", line 99: warning #1-D: last line of file ends without a newline
+"./include/lib/libc.h", line 3: warning #48-D: incompatible redefinition of macro "NULL" (declared at line 51 of "./arch/arm/armv7/boards/armv7/include/stddef.h")
+"./include/kernel/timer.h", line 20: warning #48-D: incompatible redefinition of macro "F_TIMER"
+"./include/kernel/errno.h", line 133: warning #1-D: last line of file ends without a newline
+"./kernel/syscall.c", line 109: warning #112-D: statement is unreachable
+"./include/kernel/errno.h", line 133: warning #1-D: last line of file ends without a newline
+/home/victorgilbert/ti/compiler/ti-cgt-arm_20.2.7.LTS/bin/armcl -mv7R5 --code_state=32 --float_support=VFPv3D16 -Ooff -c --opt_for_speed=0 -g --c99 --diag_warning=225 --diag_wrap=off --display_error_number --enum_type=packed --abi=eabi -I ./arch/arm/armv7/include -I ./arch/arm/armv7/include/arch -I ./include/kernel -I ./include/libpok_legacy/ -I ./arch/arm/armv7/drivers/include -I ./arch/arm/armv7/boards/armv7/include -I ./arch/arm/armv7/boards/armv7/include/bsp/ -I ./drivers/bus/include/ -I /home/victorgilbert/ti/compiler/ti-cgt-arm_20.2.7.LTS/lib/src -I /home/victorgilbert/ti/compiler/ti-cgt-arm_20.2.7.LTS/lib/src/machine -I ./arch/arm/armv7/common  -I ./include -I ./include/lib -I ./drivers/bus/include -I ./drivers/device/include -I ./arch/common -Wall -O2 -c  -mmcu=armv7  -fverbose-asm -ffreestanding  -D F_CPU=10000000 -D USART_BAUD=19200 -DF_TIMER=100 -D UNKNOWN_HEAP -D LOW_MEM -Ooff  -D__VER__=\"0.97\"  ./kernel/corotine.c
+>> WARNING: invalid compiler option --Wall (ignored)
+>> WARNING: invalid compiler option -mmcu=armv7 (ignored)
+>> WARNING: invalid compiler option -fverbose-asm (ignored)
+"./arch/arm/armv7/include/hal.h", line 99: warning #1-D: last line of file ends without a newline
+"./arch/arm/armv7/include/hal.h", line 60: warning #303-D: typedef name has already been declared (with same type)
+"./arch/arm/armv7/include/hal.h", line 99: warning #1-D: last line of file ends without a newline
+"./include/lib/libc.h", line 3: warning #48-D: incompatible redefinition of macro "NULL" (declared at line 51 of "./arch/arm/armv7/boards/armv7/include/stddef.h")
+"./include/kernel/timer.h", line 20: warning #48-D: incompatible redefinition of macro "F_TIMER"
+"./include/kernel/errno.h", line 133: warning #1-D: last line of file ends without a newline
+/home/victorgilbert/ti/compiler/ti-cgt-arm_20.2.7.LTS/bin/armcl -mv7R5 --code_state=32 --float_support=VFPv3D16 -Ooff -c --opt_for_speed=0 -g --c99 --diag_warning=225 --diag_wrap=off --display_error_number --enum_type=packed --abi=eabi -I ./arch/arm/armv7/include -I ./arch/arm/armv7/include/arch -I ./include/kernel -I ./include/libpok_legacy/ -I ./arch/arm/armv7/drivers/include -I ./arch/arm/armv7/boards/armv7/include -I ./arch/arm/armv7/boards/armv7/include/bsp/ -I ./drivers/bus/include/ -I /home/victorgilbert/ti/compiler/ti-cgt-arm_20.2.7.LTS/lib/src -I /home/victorgilbert/ti/compiler/ti-cgt-arm_20.2.7.LTS/lib/src/machine -I ./arch/arm/armv7/common  -I ./include -I ./include/lib -I ./drivers/bus/include -I ./drivers/device/include -I ./arch/common -Wall -O2 -c  -mmcu=armv7  -fverbose-asm -ffreestanding  -D F_CPU=10000000 -D USART_BAUD=19200 -DF_TIMER=100 -D UNKNOWN_HEAP -D LOW_MEM -Ooff  -D__VER__=\"0.97\"  ./kernel/ucx.c
+>> WARNING: invalid compiler option --Wall (ignored)
+>> WARNING: invalid compiler option -mmcu=armv7 (ignored)
+>> WARNING: invalid compiler option -fverbose-asm (ignored)
+"./arch/arm/armv7/include/hal.h", line 99: warning #1-D: last line of file ends without a newline
+"./arch/arm/armv7/include/hal.h", line 60: warning #303-D: typedef name has already been declared (with same type)
+"./arch/arm/armv7/include/hal.h", line 99: warning #1-D: last line of file ends without a newline
+"./include/lib/libc.h", line 3: warning #48-D: incompatible redefinition of macro "NULL" (declared at line 51 of "./arch/arm/armv7/boards/armv7/include/stddef.h")
+"./include/kernel/timer.h", line 20: warning #48-D: incompatible redefinition of macro "F_TIMER"
+"./include/kernel/errno.h", line 133: warning #1-D: last line of file ends without a newline
+"./kernel/ucx.c", line 32: warning #69-D: integer conversion resulted in a change of sign
+"./kernel/ucx.c", line 76: warning #225-D: function "_disable_interrupt_" declared implicitly
+"./kernel/ucx.c", line 127: warning #69-D: integer conversion resulted in a change of sign
+"./kernel/ucx.c", line 166: warning #69-D: integer conversion resulted in a change of sign
+"./kernel/ucx.c", line 168: warning #225-D: function "setjmp" declared implicitly
+"./kernel/ucx.c", line 175: warning #225-D: function "longjmp" declared implicitly
+"./kernel/ucx.c", line 184: warning #69-D: integer conversion resulted in a change of sign
+"./kernel/ucx.c", line 186: warning #225-D: function "setjmp" declared implicitly
+"./kernel/ucx.c", line 192: warning #225-D: function "longjmp" declared implicitly
+"./kernel/ucx.c", line 207: warning #69-D: integer conversion resulted in a change of sign
+"./kernel/ucx.c", line 209: warning #225-D: function "_disable_interrupt_" declared implicitly
+"./kernel/ucx.c", line 214: warning #69-D: integer conversion resulted in a change of sign
+"./kernel/ucx.c", line 217: warning #515-D: a value of type "void *" cannot be assigned to an entity of type "void (*)(void)"
+"./kernel/ucx.c", line 227: warning #69-D: integer conversion resulted in a change of sign
+"./kernel/ucx.c", line 254: warning #225-D: function "_disable_interrupt_" declared implicitly
+"./kernel/ucx.c", line 282: warning #225-D: function "_disable_interrupt_" declared implicitly
+"./kernel/ucx.c", line 295: warning #225-D: function "_disable_interrupt_" declared implicitly
+"./kernel/ucx.c", line 325: warning #225-D: function "_disable_interrupt_" declared implicitly
+"./kernel/ucx.c", line 366: warning #225-D: function "_disable_interrupt_" declared implicitly
+"./kernel/ucx.c", line 390: warning #225-D: function "_disable_interrupt_" declared implicitly
+"./kernel/ucx.c", line 418: warning #225-D: function "_disable_interrupt_" declared implicitly
+/home/victorgilbert/ti/compiler/ti-cgt-arm_20.2.7.LTS/bin/armcl -mv7R5 --code_state=32 --float_support=VFPv3D16 -Ooff -c --opt_for_speed=0 -g --c99 --diag_warning=225 --diag_wrap=off --display_error_number --enum_type=packed --abi=eabi -I ./arch/arm/armv7/include -I ./arch/arm/armv7/include/arch -I ./include/kernel -I ./include/libpok_legacy/ -I ./arch/arm/armv7/drivers/include -I ./arch/arm/armv7/boards/armv7/include -I ./arch/arm/armv7/boards/armv7/include/bsp/ -I ./drivers/bus/include/ -I /home/victorgilbert/ti/compiler/ti-cgt-arm_20.2.7.LTS/lib/src -I /home/victorgilbert/ti/compiler/ti-cgt-arm_20.2.7.LTS/lib/src/machine -I ./arch/arm/armv7/common  -I ./include -I ./include/lib -I ./drivers/bus/include -I ./drivers/device/include -I ./arch/common -Wall -O2 -c  -mmcu=armv7  -fverbose-asm -ffreestanding  -D F_CPU=10000000 -D USART_BAUD=19200 -DF_TIMER=100 -D UNKNOWN_HEAP -D LOW_MEM -Ooff  -D__VER__=\"0.97\"  ./init/main.c
+>> WARNING: invalid compiler option --Wall (ignored)
+>> WARNING: invalid compiler option -mmcu=armv7 (ignored)
+>> WARNING: invalid compiler option -fverbose-asm (ignored)
+"./arch/arm/armv7/include/hal.h", line 99: warning #1-D: last line of file ends without a newline
+"./arch/arm/armv7/include/hal.h", line 60: warning #303-D: typedef name has already been declared (with same type)
+"./arch/arm/armv7/include/hal.h", line 99: warning #1-D: last line of file ends without a newline
+"./include/lib/libc.h", line 3: warning #48-D: incompatible redefinition of macro "NULL" (declared at line 51 of "./arch/arm/armv7/boards/armv7/include/stddef.h")
+"./include/kernel/timer.h", line 20: warning #48-D: incompatible redefinition of macro "F_TIMER"
+"./include/kernel/errno.h", line 133: warning #1-D: last line of file ends without a newline
+"./init/main.c", line 36: warning #69-D: integer conversion resulted in a change of sign
+"./init/main.c", line 39: warning #225-D: function "setjmp" declared implicitly
+"./init/main.c", line 42: warning #69-D: integer conversion resulted in a change of sign
+"./init/main.c", line 49: warning #225-D: function "ja_context_jump" declared implicitly
+/home/victorgilbert/ti/compiler/ti-cgt-arm_20.2.7.LTS/bin/armcl -mv7R5 --code_state=32 --float_support=VFPv3D16 -Ooff -c --opt_for_speed=0 -g --c99 --diag_warning=225 --diag_wrap=off --display_error_number --enum_type=packed --abi=eabi -I ./arch/arm/armv7/include -I ./arch/arm/armv7/include/arch -I ./include/kernel -I ./include/libpok_legacy/ -I ./arch/arm/armv7/drivers/include -I ./arch/arm/armv7/boards/armv7/include -I ./arch/arm/armv7/boards/armv7/include/bsp/ -I ./drivers/bus/include/ -I /home/victorgilbert/ti/compiler/ti-cgt-arm_20.2.7.LTS/lib/src -I /home/victorgilbert/ti/compiler/ti-cgt-arm_20.2.7.LTS/lib/src/machine -I ./arch/arm/armv7/common  -I ./include -I ./include/lib -I ./drivers/bus/include -I ./drivers/device/include -I ./arch/common -Wall -O2 -c  -mmcu=armv7  -fverbose-asm -ffreestanding  -D F_CPU=10000000 -D USART_BAUD=19200 -DF_TIMER=100 -D UNKNOWN_HEAP -D LOW_MEM -Ooff  -D__VER__=\"0.97\"  -o ./arch/arm/armv7/boards/armv7/*.c
+>> WARNING: invalid compiler option --Wall (ignored)
+>> WARNING: invalid compiler option -mmcu=armv7 (ignored)
+>> WARNING: invalid compiler option -fverbose-asm (ignored)
+[bsp.c]
+"./include/kernel/errno.h", line 133: warning #1-D: last line of file ends without a newline
+"./include/kernel/errno.h", line 133: warning #1-D: last line of file ends without a newline
+"./arch/arm/armv7/include/libpok_legacy/errno.h", line 44: warning #1-D: last line of file ends without a newline
+"./arch/arm/armv7/include/libpok_legacy/partition_types.h", line 33: warning #1-D: last line of file ends without a newline
+"./arch/arm/armv7/include/libpok_legacy/syscall_map_arinc.h", line 94: warning #225-D: function "pok_syscall4" declared implicitly
+"./arch/arm/armv7/include/libpok_legacy/syscall_map_arinc.h", line 106: warning #225-D: function "pok_syscall1" declared implicitly
+"./arch/arm/armv7/include/libpok_legacy/syscall_map_arinc.h", line 124: warning #225-D: function "pok_syscall0" declared implicitly
+"./arch/arm/armv7/include/libpok_legacy/syscall_map_arinc.h", line 144: warning #225-D: function "pok_syscall4" declared implicitly
+"./arch/arm/armv7/include/libpok_legacy/syscall_map_arinc.h", line 156: warning #225-D: function "pok_syscall2" declared implicitly
+"./arch/arm/armv7/include/libpok_legacy/syscall_map_arinc.h", line 166: warning #225-D: function "pok_syscall2" declared implicitly
+"./arch/arm/armv7/include/libpok_legacy/syscall_map_arinc.h", line 175: warning #225-D: function "pok_syscall1" declared implicitly
+"./arch/arm/armv7/include/libpok_legacy/syscall_map_arinc.h", line 183: warning #225-D: function "pok_syscall1" declared implicitly
+"./arch/arm/armv7/include/libpok_legacy/syscall_map_arinc.h", line 191: warning #225-D: function "pok_syscall0" declared implicitly
+"./arch/arm/armv7/include/libpok_legacy/syscall_map_arinc.h", line 198: warning #225-D: function "pok_syscall1" declared implicitly
+"./arch/arm/armv7/include/libpok_legacy/syscall_map_arinc.h", line 206: warning #225-D: function "pok_syscall1" declared implicitly
+"./arch/arm/armv7/include/libpok_legacy/syscall_map_arinc.h", line 214: warning #225-D: function "pok_syscall0" declared implicitly
+"./arch/arm/armv7/include/libpok_legacy/syscall_map_arinc.h", line 222: warning #225-D: function "pok_syscall2" declared implicitly
+"./arch/arm/armv7/include/libpok_legacy/syscall_map_arinc.h", line 232: warning #225-D: function "pok_syscall0" declared implicitly
+"./arch/arm/armv7/include/libpok_legacy/syscall_map_arinc.h", line 237: warning #233-D: declaration is not visible outside of function
+"./arch/arm/armv7/include/libpok_legacy/syscall_map_arinc.h", line 239: warning #225-D: function "pok_syscall1" declared implicitly
+"./arch/arm/armv7/include/libpok_legacy/syscall_map_arinc.h", line 245: warning #233-D: declaration is not visible outside of function
+"./arch/arm/armv7/include/libpok_legacy/syscall_map_arinc.h", line 248: warning #225-D: function "pok_syscall2" declared implicitly
+"./arch/arm/armv7/include/libpok_legacy/syscall_map_arinc.h", line 255: warning #233-D: declaration is not visible outside of function
+"./arch/arm/armv7/include/libpok_legacy/syscall_map_arinc.h", line 258: warning #225-D: function "pok_syscall2" declared implicitly
+"./arch/arm/armv7/include/libpok_legacy/syscall_map_arinc.h", line 265: warning #233-D: declaration is not visible outside of function
+"./arch/arm/armv7/include/libpok_legacy/syscall_map_arinc.h", line 266: warning #233-D: declaration is not visible outside of function
+"./arch/arm/armv7/include/libpok_legacy/syscall_map_arinc.h", line 269: warning #225-D: function "pok_syscall3" declared implicitly
+"./arch/arm/armv7/include/libpok_legacy/syscall_map_arinc.h", line 277: warning #233-D: declaration is not visible outside of function
+"./arch/arm/armv7/include/libpok_legacy/syscall_map_arinc.h", line 278: warning #233-D: declaration is not visible outside of function
+"./arch/arm/armv7/include/libpok_legacy/syscall_map_arinc.h", line 281: warning #225-D: function "pok_syscall3" declared implicitly
+"./arch/arm/armv7/include/libpok_legacy/syscall_map_arinc.h", line 293: warning #225-D: function "pok_syscall1" declared implicitly
+"./arch/arm/armv7/include/libpok_legacy/syscall_map_arinc.h", line 301: warning #225-D: function "pok_syscall1" declared implicitly
+"./arch/arm/armv7/include/libpok_legacy/syscall_map_arinc.h", line 309: warning #225-D: function "pok_syscall1" declared implicitly
+"./arch/arm/armv7/include/libpok_legacy/syscall_map_arinc.h", line 317: warning #225-D: function "pok_syscall1" declared implicitly
+"./arch/arm/armv7/include/libpok_legacy/syscall_map_arinc.h", line 360: warning #225-D: function "pok_syscall2" declared implicitly
+"./arch/arm/armv7/include/libpok_legacy/syscall_map_arinc.h", line 516: warning #225-D: function "pok_syscall2" declared implicitly
+"./arch/arm/armv7/include/hal.h", line 99: warning #1-D: last line of file ends without a newline
+"./include/lib/libc.h", line 3: warning #48-D: incompatible redefinition of macro "NULL" (declared at line 51 of "./arch/arm/armv7/boards/armv7/include/stddef.h")
+[cons.c]
+"./include/kernel/errno.h", line 133: warning #1-D: last line of file ends without a newline
+"./arch/arm/armv7/include/hal.h", line 99: warning #1-D: last line of file ends without a newline
+"./include/lib/libc.h", line 3: warning #48-D: incompatible redefinition of macro "NULL" (declared at line 51 of "./arch/arm/armv7/boards/armv7/include/stddef.h")
+"./include/kernel/errno.h", line 133: warning #1-D: last line of file ends without a newline
+"./arch/arm/armv7/include/hal.h", line 60: warning #303-D: typedef name has already been declared (with same type)
+"./arch/arm/armv7/include/hal.h", line 99: warning #1-D: last line of file ends without a newline
+"./arch/arm/armv7/boards/armv7/cons.c", line 117: warning #179-D: function "iostream_get_default" was declared but never referenced
+[rti.c]
+"./include/kernel/errno.h", line 133: warning #1-D: last line of file ends without a newline
+[serial.c]
+[vim.c]
+/home/victorgilbert/ti/compiler/ti-cgt-arm_20.2.7.LTS/bin/armcl -mv7R5 --code_state=32 --float_support=VFPv3D16 -Ooff -c --opt_for_speed=0 -g --c99 --diag_warning=225 --diag_wrap=off --display_error_number --enum_type=packed --abi=eabi -I ./arch/arm/armv7/include -I ./arch/arm/armv7/include/arch -I ./include/kernel -I ./include/libpok_legacy/ -I ./arch/arm/armv7/drivers/include -I ./arch/arm/armv7/boards/armv7/include -I ./arch/arm/armv7/boards/armv7/include/bsp/ -I ./drivers/bus/include/ -I /home/victorgilbert/ti/compiler/ti-cgt-arm_20.2.7.LTS/lib/src -I /home/victorgilbert/ti/compiler/ti-cgt-arm_20.2.7.LTS/lib/src/machine -I ./arch/arm/armv7/common  -I ./include -I ./include/lib -I ./drivers/bus/include -I ./drivers/device/include -I ./arch/common -Wall -O2 -c  -mmcu=armv7  -fverbose-asm -ffreestanding  -D F_CPU=10000000 -D USART_BAUD=19200 -DF_TIMER=100 -D UNKNOWN_HEAP -D LOW_MEM -Ooff  -D__VER__=\"0.97\"  -o ./arch/arm/armv7/drivers/source/*.c
+>> WARNING: invalid compiler option --Wall (ignored)
+>> WARNING: invalid compiler option -mmcu=armv7 (ignored)
+>> WARNING: invalid compiler option -fverbose-asm (ignored)
+[HL_adc.c]
+"./arch/arm/armv7/boards/armv7/include/stdbool.h", line 13: warning #1-D: last line of file ends without a newline
+[HL_can.c]
+"./arch/arm/armv7/boards/armv7/include/stdbool.h", line 13: warning #1-D: last line of file ends without a newline
+[HL_crc.c]
+"./arch/arm/armv7/boards/armv7/include/stdbool.h", line 13: warning #1-D: last line of file ends without a newline
+[HL_dcc.c]
+"./arch/arm/armv7/boards/armv7/include/stdbool.h", line 13: warning #1-D: last line of file ends without a newline
+[HL_ecap.c]
+"./arch/arm/armv7/boards/armv7/include/stdbool.h", line 13: warning #1-D: last line of file ends without a newline
+[HL_emac.c]
+"./arch/arm/armv7/boards/armv7/include/stdbool.h", line 13: warning #1-D: last line of file ends without a newline
+[HL_emif.c]
+"./arch/arm/armv7/boards/armv7/include/stdbool.h", line 13: warning #1-D: last line of file ends without a newline
+[HL_epc.c]
+"./arch/arm/armv7/boards/armv7/include/stdbool.h", line 13: warning #1-D: last line of file ends without a newline
+[HL_eqep.c]
+"./arch/arm/armv7/boards/armv7/include/stdbool.h", line 13: warning #1-D: last line of file ends without a newline
+[HL_errata.c]
+"./arch/arm/armv7/boards/armv7/include/stdbool.h", line 13: warning #1-D: last line of file ends without a newline
+[HL_errata_SSWF021_45.c]
+[HL_esm.c]
+"./arch/arm/armv7/boards/armv7/include/stdbool.h", line 13: warning #1-D: last line of file ends without a newline
+[HL_etpwm.c]
+"./arch/arm/armv7/boards/armv7/include/stdbool.h", line 13: warning #1-D: last line of file ends without a newline
+[HL_gio.c]
+"./arch/arm/armv7/boards/armv7/include/stdbool.h", line 13: warning #1-D: last line of file ends without a newline
+[HL_het.c]
+"./arch/arm/armv7/boards/armv7/include/stdbool.h", line 13: warning #1-D: last line of file ends without a newline
+[HL_i2c.c]
+"./arch/arm/armv7/boards/armv7/include/stdbool.h", line 13: warning #1-D: last line of file ends without a newline
+[HL_lin.c]
+"./arch/arm/armv7/boards/armv7/include/stdbool.h", line 13: warning #1-D: last line of file ends without a newline
+[HL_mdio.c]
+"./arch/arm/armv7/boards/armv7/include/stdbool.h", line 13: warning #1-D: last line of file ends without a newline
+[HL_mibspi.c]
+"./arch/arm/armv7/boards/armv7/include/stdbool.h", line 13: warning #1-D: last line of file ends without a newline
+[HL_nmpu.c]
+"./arch/arm/armv7/boards/armv7/include/stdbool.h", line 13: warning #1-D: last line of file ends without a newline
+[HL_notification.c]
+"./arch/arm/armv7/boards/armv7/include/stdbool.h", line 13: warning #1-D: last line of file ends without a newline
+[HL_phy_dp83640.c]
+"./arch/arm/armv7/boards/armv7/include/stdbool.h", line 13: warning #1-D: last line of file ends without a newline
+[HL_phy_tlk111.c]
+"./arch/arm/armv7/boards/armv7/include/stdbool.h", line 13: warning #1-D: last line of file ends without a newline
+[HL_pinmux.c]
+"./arch/arm/armv7/boards/armv7/include/stdbool.h", line 13: warning #1-D: last line of file ends without a newline
+[HL_pom.c]
+"./arch/arm/armv7/boards/armv7/include/stdbool.h", line 13: warning #1-D: last line of file ends without a newline
+[HL_rti.c]
+"./arch/arm/armv7/boards/armv7/include/stdbool.h", line 13: warning #1-D: last line of file ends without a newline
+[HL_sci.c]
+"./arch/arm/armv7/boards/armv7/include/stdbool.h", line 13: warning #1-D: last line of file ends without a newline
+[HL_sys_dma.c]
+"./arch/arm/armv7/boards/armv7/include/stdbool.h", line 13: warning #1-D: last line of file ends without a newline
+[HL_sys_main.c]
+"./arch/arm/armv7/boards/armv7/include/stdbool.h", line 13: warning #1-D: last line of file ends without a newline
+[HL_sys_pcr.c]
+"./arch/arm/armv7/boards/armv7/include/stdbool.h", line 13: warning #1-D: last line of file ends without a newline
+[HL_sys_phantom.c]
+"./arch/arm/armv7/boards/armv7/include/stdbool.h", line 13: warning #1-D: last line of file ends without a newline
+[HL_sys_pmm.c]
+"./arch/arm/armv7/boards/armv7/include/stdbool.h", line 13: warning #1-D: last line of file ends without a newline
+[HL_sys_startup.c]
+"./arch/arm/armv7/boards/armv7/include/stdbool.h", line 13: warning #1-D: last line of file ends without a newline
+"./arch/arm/armv7/drivers/source/HL_sys_startup.c", line 124: warning #225-D: function "_system_post_cinit" declared implicitly
+"./arch/arm/armv7/drivers/source/HL_sys_startup.c", line 91: warning #1111-D: pragma CODE_STATE can only be applied to a function definition, not "_c_int00" (declared at line 86)
+[HL_sys_vim.c]
+"./arch/arm/armv7/boards/armv7/include/stdbool.h", line 13: warning #1-D: last line of file ends without a newline
+[HL_system.c]
+"./arch/arm/armv7/boards/armv7/include/stdbool.h", line 13: warning #1-D: last line of file ends without a newline
+/home/victorgilbert/ti/compiler/ti-cgt-arm_20.2.7.LTS/bin/armcl -mv7R5 --code_state=32 --float_support=VFPv3D16 -Ooff -c --opt_for_speed=0 -g --c99 --diag_warning=225 --diag_wrap=off --display_error_number --enum_type=packed --abi=eabi -I ./arch/arm/armv7/include -I ./arch/arm/armv7/include/arch -I ./include/kernel -I ./include/libpok_legacy/ -I ./arch/arm/armv7/drivers/include -I ./arch/arm/armv7/boards/armv7/include -I ./arch/arm/armv7/boards/armv7/include/bsp/ -I ./drivers/bus/include/ -I /home/victorgilbert/ti/compiler/ti-cgt-arm_20.2.7.LTS/lib/src -I /home/victorgilbert/ti/compiler/ti-cgt-arm_20.2.7.LTS/lib/src/machine -I ./arch/arm/armv7/common  -I ./include -I ./include/lib -I ./drivers/bus/include -I ./drivers/device/include -I ./arch/common -Wall -O2 -c  -mmcu=armv7  -fverbose-asm -ffreestanding  -D F_CPU=10000000 -D USART_BAUD=19200 -DF_TIMER=100 -D UNKNOWN_HEAP -D LOW_MEM -Ooff  -D__VER__=\"0.97\"  -o -i"/home/victorgilbert/ti/compiler/ti-cgt-arm_20.2.7.LTS/lib" -Ooff/src/*.c
+>> WARNING: invalid compiler option --Wall (ignored)
+>> WARNING: invalid compiler option -mmcu=armv7 (ignored)
+>> WARNING: invalid compiler option -fverbose-asm (ignored)
+error #24015-D: bad argument to option -O: should be one of {off,0,1,2,3,4}
+make: *** [arch/arm/armv7/arch.mak:51: hal] Error 1
+/home/victorgilbert/ti/compiler/ti-cgt-arm_20.2.7.LTS/bin/armcl -mv7R5 --code_state=32 --float_support=VFPv3D16 -Ooff -c --opt_for_speed=0 -g --c99 --diag_warning=225 --diag_wrap=off --display_error_number --enum_type=packed --abi=eabi -I ./arch/arm/armv7/include -I ./arch/arm/armv7/include/arch -I ./include/kernel -I ./include/libpok_legacy/ -I ./arch/arm/armv7/drivers/include -I ./arch/arm/armv7/boards/armv7/include -I ./arch/arm/armv7/boards/armv7/include/bsp/ -I ./drivers/bus/include/ -I /home/victorgilbert/ti/compiler/ti-cgt-arm_20.2.7.LTS/lib/src -I /home/victorgilbert/ti/compiler/ti-cgt-arm_20.2.7.LTS/lib/src/machine -I ./arch/arm/armv7/common  -I ./include -I ./include/lib -I ./drivers/bus/include -I ./drivers/device/include -I ./arch/common -Wall -O2 -c  -mmcu=armv7  -fverbose-asm -ffreestanding  -D F_CPU=10000000 -D USART_BAUD=19200 -DF_TIMER=100 -D UNKNOWN_HEAP -D LOW_MEM -Ooff  -D__VER__=\"0.97\"  -o ./arch/arm/armv7/boards/armv7/*.c
+>> WARNING: invalid compiler option --Wall (ignored)
+>> WARNING: invalid compiler option -mmcu=armv7 (ignored)
+>> WARNING: invalid compiler option -fverbose-asm (ignored)
+[bsp.c]
+"./include/kernel/errno.h", line 133: warning #1-D: last line of file ends without a newline
+"./include/kernel/errno.h", line 133: warning #1-D: last line of file ends without a newline
+"./arch/arm/armv7/include/libpok_legacy/errno.h", line 44: warning #1-D: last line of file ends without a newline
+"./arch/arm/armv7/include/libpok_legacy/partition_types.h", line 33: warning #1-D: last line of file ends without a newline
+"./arch/arm/armv7/include/libpok_legacy/syscall_map_arinc.h", line 94: warning #225-D: function "pok_syscall4" declared implicitly
+"./arch/arm/armv7/include/libpok_legacy/syscall_map_arinc.h", line 106: warning #225-D: function "pok_syscall1" declared implicitly
+"./arch/arm/armv7/include/libpok_legacy/syscall_map_arinc.h", line 124: warning #225-D: function "pok_syscall0" declared implicitly
+"./arch/arm/armv7/include/libpok_legacy/syscall_map_arinc.h", line 144: warning #225-D: function "pok_syscall4" declared implicitly
+"./arch/arm/armv7/include/libpok_legacy/syscall_map_arinc.h", line 156: warning #225-D: function "pok_syscall2" declared implicitly
+"./arch/arm/armv7/include/libpok_legacy/syscall_map_arinc.h", line 166: warning #225-D: function "pok_syscall2" declared implicitly
+"./arch/arm/armv7/include/libpok_legacy/syscall_map_arinc.h", line 175: warning #225-D: function "pok_syscall1" declared implicitly
+"./arch/arm/armv7/include/libpok_legacy/syscall_map_arinc.h", line 183: warning #225-D: function "pok_syscall1" declared implicitly
+"./arch/arm/armv7/include/libpok_legacy/syscall_map_arinc.h", line 191: warning #225-D: function "pok_syscall0" declared implicitly
+"./arch/arm/armv7/include/libpok_legacy/syscall_map_arinc.h", line 198: warning #225-D: function "pok_syscall1" declared implicitly
+"./arch/arm/armv7/include/libpok_legacy/syscall_map_arinc.h", line 206: warning #225-D: function "pok_syscall1" declared implicitly
+"./arch/arm/armv7/include/libpok_legacy/syscall_map_arinc.h", line 214: warning #225-D: function "pok_syscall0" declared implicitly
+"./arch/arm/armv7/include/libpok_legacy/syscall_map_arinc.h", line 222: warning #225-D: function "pok_syscall2" declared implicitly
+"./arch/arm/armv7/include/libpok_legacy/syscall_map_arinc.h", line 232: warning #225-D: function "pok_syscall0" declared implicitly
+"./arch/arm/armv7/include/libpok_legacy/syscall_map_arinc.h", line 237: warning #233-D: declaration is not visible outside of function
+"./arch/arm/armv7/include/libpok_legacy/syscall_map_arinc.h", line 239: warning #225-D: function "pok_syscall1" declared implicitly
+"./arch/arm/armv7/include/libpok_legacy/syscall_map_arinc.h", line 245: warning #233-D: declaration is not visible outside of function
+"./arch/arm/armv7/include/libpok_legacy/syscall_map_arinc.h", line 248: warning #225-D: function "pok_syscall2" declared implicitly
+"./arch/arm/armv7/include/libpok_legacy/syscall_map_arinc.h", line 255: warning #233-D: declaration is not visible outside of function
+"./arch/arm/armv7/include/libpok_legacy/syscall_map_arinc.h", line 258: warning #225-D: function "pok_syscall2" declared implicitly
+"./arch/arm/armv7/include/libpok_legacy/syscall_map_arinc.h", line 265: warning #233-D: declaration is not visible outside of function
+"./arch/arm/armv7/include/libpok_legacy/syscall_map_arinc.h", line 266: warning #233-D: declaration is not visible outside of function
+"./arch/arm/armv7/include/libpok_legacy/syscall_map_arinc.h", line 269: warning #225-D: function "pok_syscall3" declared implicitly
+"./arch/arm/armv7/include/libpok_legacy/syscall_map_arinc.h", line 277: warning #233-D: declaration is not visible outside of function
+"./arch/arm/armv7/include/libpok_legacy/syscall_map_arinc.h", line 278: warning #233-D: declaration is not visible outside of function
+"./arch/arm/armv7/include/libpok_legacy/syscall_map_arinc.h", line 281: warning #225-D: function "pok_syscall3" declared implicitly
+"./arch/arm/armv7/include/libpok_legacy/syscall_map_arinc.h", line 293: warning #225-D: function "pok_syscall1" declared implicitly
+"./arch/arm/armv7/include/libpok_legacy/syscall_map_arinc.h", line 301: warning #225-D: function "pok_syscall1" declared implicitly
+"./arch/arm/armv7/include/libpok_legacy/syscall_map_arinc.h", line 309: warning #225-D: function "pok_syscall1" declared implicitly
+"./arch/arm/armv7/include/libpok_legacy/syscall_map_arinc.h", line 317: warning #225-D: function "pok_syscall1" declared implicitly
+"./arch/arm/armv7/include/libpok_legacy/syscall_map_arinc.h", line 360: warning #225-D: function "pok_syscall2" declared implicitly
+"./arch/arm/armv7/include/libpok_legacy/syscall_map_arinc.h", line 516: warning #225-D: function "pok_syscall2" declared implicitly
+"./arch/arm/armv7/include/hal.h", line 99: warning #1-D: last line of file ends without a newline
+"./include/lib/libc.h", line 3: warning #48-D: incompatible redefinition of macro "NULL" (declared at line 51 of "./arch/arm/armv7/boards/armv7/include/stddef.h")
+[cons.c]
+"./include/kernel/errno.h", line 133: warning #1-D: last line of file ends without a newline
+"./arch/arm/armv7/include/hal.h", line 99: warning #1-D: last line of file ends without a newline
+"./include/lib/libc.h", line 3: warning #48-D: incompatible redefinition of macro "NULL" (declared at line 51 of "./arch/arm/armv7/boards/armv7/include/stddef.h")
+"./include/kernel/errno.h", line 133: warning #1-D: last line of file ends without a newline
+"./arch/arm/armv7/include/hal.h", line 60: warning #303-D: typedef name has already been declared (with same type)
+"./arch/arm/armv7/include/hal.h", line 99: warning #1-D: last line of file ends without a newline
+"./arch/arm/armv7/boards/armv7/cons.c", line 117: warning #179-D: function "iostream_get_default" was declared but never referenced
+[rti.c]
+"./include/kernel/errno.h", line 133: warning #1-D: last line of file ends without a newline
+[serial.c]
+[vim.c]
+/home/victorgilbert/ti/compiler/ti-cgt-arm_20.2.7.LTS/bin/armcl -mv7R5 --code_state=32 --float_support=VFPv3D16 -Ooff -c --opt_for_speed=0 -g --c99 --diag_warning=225 --diag_wrap=off --display_error_number --enum_type=packed --abi=eabi -I ./arch/arm/armv7/include -I ./arch/arm/armv7/include/arch -I ./include/kernel -I ./include/libpok_legacy/ -I ./arch/arm/armv7/drivers/include -I ./arch/arm/armv7/boards/armv7/include -I ./arch/arm/armv7/boards/armv7/include/bsp/ -I ./drivers/bus/include/ -I /home/victorgilbert/ti/compiler/ti-cgt-arm_20.2.7.LTS/lib/src -I /home/victorgilbert/ti/compiler/ti-cgt-arm_20.2.7.LTS/lib/src/machine -I ./arch/arm/armv7/common  -I ./include -I ./include/lib -I ./drivers/bus/include -I ./drivers/device/include -I ./arch/common -Wall -O2 -c  -mmcu=armv7  -fverbose-asm -ffreestanding  -D F_CPU=10000000 -D USART_BAUD=19200 -DF_TIMER=100 -D UNKNOWN_HEAP -D LOW_MEM -Ooff  -D__VER__=\"0.97\"  -o ./arch/arm/armv7/drivers/source/*.c
+>> WARNING: invalid compiler option --Wall (ignored)
+>> WARNING: invalid compiler option -mmcu=armv7 (ignored)
+>> WARNING: invalid compiler option -fverbose-asm (ignored)
+[HL_adc.c]
+"./arch/arm/armv7/boards/armv7/include/stdbool.h", line 13: warning #1-D: last line of file ends without a newline
+[HL_can.c]
+"./arch/arm/armv7/boards/armv7/include/stdbool.h", line 13: warning #1-D: last line of file ends without a newline
+[HL_crc.c]
+"./arch/arm/armv7/boards/armv7/include/stdbool.h", line 13: warning #1-D: last line of file ends without a newline
+[HL_dcc.c]
+"./arch/arm/armv7/boards/armv7/include/stdbool.h", line 13: warning #1-D: last line of file ends without a newline
+[HL_ecap.c]
+"./arch/arm/armv7/boards/armv7/include/stdbool.h", line 13: warning #1-D: last line of file ends without a newline
+[HL_emac.c]
+"./arch/arm/armv7/boards/armv7/include/stdbool.h", line 13: warning #1-D: last line of file ends without a newline
+[HL_emif.c]
+"./arch/arm/armv7/boards/armv7/include/stdbool.h", line 13: warning #1-D: last line of file ends without a newline
+[HL_epc.c]
+"./arch/arm/armv7/boards/armv7/include/stdbool.h", line 13: warning #1-D: last line of file ends without a newline
+[HL_eqep.c]
+"./arch/arm/armv7/boards/armv7/include/stdbool.h", line 13: warning #1-D: last line of file ends without a newline
+[HL_errata.c]
+"./arch/arm/armv7/boards/armv7/include/stdbool.h", line 13: warning #1-D: last line of file ends without a newline
+[HL_errata_SSWF021_45.c]
+[HL_esm.c]
+"./arch/arm/armv7/boards/armv7/include/stdbool.h", line 13: warning #1-D: last line of file ends without a newline
+[HL_etpwm.c]
+"./arch/arm/armv7/boards/armv7/include/stdbool.h", line 13: warning #1-D: last line of file ends without a newline
+[HL_gio.c]
+"./arch/arm/armv7/boards/armv7/include/stdbool.h", line 13: warning #1-D: last line of file ends without a newline
+[HL_het.c]
+"./arch/arm/armv7/boards/armv7/include/stdbool.h", line 13: warning #1-D: last line of file ends without a newline
+[HL_i2c.c]
+"./arch/arm/armv7/boards/armv7/include/stdbool.h", line 13: warning #1-D: last line of file ends without a newline
+[HL_lin.c]
+"./arch/arm/armv7/boards/armv7/include/stdbool.h", line 13: warning #1-D: last line of file ends without a newline
+[HL_mdio.c]
+"./arch/arm/armv7/boards/armv7/include/stdbool.h", line 13: warning #1-D: last line of file ends without a newline
+[HL_mibspi.c]
+"./arch/arm/armv7/boards/armv7/include/stdbool.h", line 13: warning #1-D: last line of file ends without a newline
+[HL_nmpu.c]
+"./arch/arm/armv7/boards/armv7/include/stdbool.h", line 13: warning #1-D: last line of file ends without a newline
+[HL_notification.c]
+"./arch/arm/armv7/boards/armv7/include/stdbool.h", line 13: warning #1-D: last line of file ends without a newline
+[HL_phy_dp83640.c]
+"./arch/arm/armv7/boards/armv7/include/stdbool.h", line 13: warning #1-D: last line of file ends without a newline
+[HL_phy_tlk111.c]
+"./arch/arm/armv7/boards/armv7/include/stdbool.h", line 13: warning #1-D: last line of file ends without a newline
+[HL_pinmux.c]
+"./arch/arm/armv7/boards/armv7/include/stdbool.h", line 13: warning #1-D: last line of file ends without a newline
+[HL_pom.c]
+"./arch/arm/armv7/boards/armv7/include/stdbool.h", line 13: warning #1-D: last line of file ends without a newline
+[HL_rti.c]
+"./arch/arm/armv7/boards/armv7/include/stdbool.h", line 13: warning #1-D: last line of file ends without a newline
+[HL_sci.c]
+"./arch/arm/armv7/boards/armv7/include/stdbool.h", line 13: warning #1-D: last line of file ends without a newline
+[HL_sys_dma.c]
+"./arch/arm/armv7/boards/armv7/include/stdbool.h", line 13: warning #1-D: last line of file ends without a newline
+[HL_sys_main.c]
+"./arch/arm/armv7/boards/armv7/include/stdbool.h", line 13: warning #1-D: last line of file ends without a newline
+[HL_sys_pcr.c]
+"./arch/arm/armv7/boards/armv7/include/stdbool.h", line 13: warning #1-D: last line of file ends without a newline
+[HL_sys_phantom.c]
+"./arch/arm/armv7/boards/armv7/include/stdbool.h", line 13: warning #1-D: last line of file ends without a newline
+[HL_sys_pmm.c]
+"./arch/arm/armv7/boards/armv7/include/stdbool.h", line 13: warning #1-D: last line of file ends without a newline
+[HL_sys_startup.c]
+"./arch/arm/armv7/boards/armv7/include/stdbool.h", line 13: warning #1-D: last line of file ends without a newline
+"./arch/arm/armv7/drivers/source/HL_sys_startup.c", line 124: warning #225-D: function "_system_post_cinit" declared implicitly
+"./arch/arm/armv7/drivers/source/HL_sys_startup.c", line 91: warning #1111-D: pragma CODE_STATE can only be applied to a function definition, not "_c_int00" (declared at line 86)
+[HL_sys_vim.c]
+"./arch/arm/armv7/boards/armv7/include/stdbool.h", line 13: warning #1-D: last line of file ends without a newline
+[HL_system.c]
+"./arch/arm/armv7/boards/armv7/include/stdbool.h", line 13: warning #1-D: last line of file ends without a newline
+/home/victorgilbert/ti/compiler/ti-cgt-arm_20.2.7.LTS/bin/armcl -mv7R5 --code_state=32 --float_support=VFPv3D16 -Ooff -c --opt_for_speed=0 -g --c99 --diag_warning=225 --diag_wrap=off --display_error_number --enum_type=packed --abi=eabi -I ./arch/arm/armv7/include -I ./arch/arm/armv7/include/arch -I ./include/kernel -I ./include/libpok_legacy/ -I ./arch/arm/armv7/drivers/include -I ./arch/arm/armv7/boards/armv7/include -I ./arch/arm/armv7/boards/armv7/include/bsp/ -I ./drivers/bus/include/ -I /home/victorgilbert/ti/compiler/ti-cgt-arm_20.2.7.LTS/lib/src -I /home/victorgilbert/ti/compiler/ti-cgt-arm_20.2.7.LTS/lib/src/machine -I ./arch/arm/armv7/common  -I ./include -I ./include/lib -I ./drivers/bus/include -I ./drivers/device/include -I ./arch/common -Wall -O2 -c  -mmcu=armv7  -fverbose-asm -ffreestanding  -D F_CPU=10000000 -D USART_BAUD=19200 -DF_TIMER=100 -D UNKNOWN_HEAP -D LOW_MEM -Ooff  -D__VER__=\"0.97\"  -o -i"/home/victorgilbert/ti/compiler/ti-cgt-arm_20.2.7.LTS/lib" -Ooff/src/*.c
+>> WARNING: invalid compiler option --Wall (ignored)
+>> WARNING: invalid compiler option -mmcu=armv7 (ignored)
+>> WARNING: invalid compiler option -fverbose-asm (ignored)
+error #24015-D: bad argument to option -O: should be one of {off,0,1,2,3,4}
+make: *** [arch/arm/armv7/arch.mak:51: hal] Error 1
+mv: cannot stat './echo.o': No such file or directory
+/home/victorgilbert/ti/compiler/ti-cgt-arm_20.2.7.LTS/bin/armcl -mv7R5 --code_state=32 --float_support=VFPv3D16 -Ooff -c --opt_for_speed=0 -g --c99 --diag_warning=225 --diag_wrap=off --display_error_number --enum_type=packed --abi=eabi -I ./arch/arm/armv7/include -I ./arch/arm/armv7/include/arch -I ./include/kernel -I ./include/libpok_legacy/ -I ./arch/arm/armv7/drivers/include -I ./arch/arm/armv7/boards/armv7/include -I ./arch/arm/armv7/boards/armv7/include/bsp/ -I ./drivers/bus/include/ -I /home/victorgilbert/ti/compiler/ti-cgt-arm_20.2.7.LTS/lib/src -I /home/victorgilbert/ti/compiler/ti-cgt-arm_20.2.7.LTS/lib/src/machine -I ./arch/arm/armv7/common  -I ./include -I ./include/lib -I ./drivers/bus/include -I ./drivers/device/include -I ./arch/common -Wall -O2 -c  -mmcu=armv7  -fverbose-asm -ffreestanding  -D F_CPU=10000000 -D USART_BAUD=19200 -DF_TIMER=100 -D UNKNOWN_HEAP -D LOW_MEM -Ooff  -D__VER__=\"0.97\"  -o ./build/app/echo.o app/echo.c
+>> WARNING: invalid compiler option --Wall (ignored)
+>> WARNING: invalid compiler option -mmcu=armv7 (ignored)
+>> WARNING: invalid compiler option -fverbose-asm (ignored)
+>> WARNING: object file specified, but linking not enabled
+[echo.c]
+"./arch/arm/armv7/include/hal.h", line 99: warning #1-D: last line of file ends without a newline
+"./arch/arm/armv7/include/hal.h", line 60: warning #303-D: typedef name has already been declared (with same type)
+"./arch/arm/armv7/include/hal.h", line 99: warning #1-D: last line of file ends without a newline
+"./include/lib/libc.h", line 3: warning #48-D: incompatible redefinition of macro "NULL" (declared at line 51 of "./arch/arm/armv7/boards/armv7/include/stddef.h")
+"./include/kernel/timer.h", line 20: warning #48-D: incompatible redefinition of macro "F_TIMER"
+"./include/kernel/errno.h", line 133: warning #1-D: last line of file ends without a newline
+/home/victorgilbert/ti/compiler/ti-cgt-arm_20.2.7.LTS/bin/armcl --run_linker -i"/home/victorgilbert/ti/compiler/ti-cgt-arm_20.2.7.LTS/lib" -Ooff ./build/app/*.o ./build/kernel/*.o --output_file=app.out --no_warnings  -library=./arch/arm/armv7/drivers/linker.cmd --map_file=app.map
+warning: Case insensitivity of options has been deprecated; O must be written
+   as o in future releases
+<Linking>
+"/tmp/TI2UuZxhZvC", line 7: warning: no files match the pattern
+   ./build/app/*.o
+error: cannot find file "ibrary=./arch/arm/armv7/drivers/linker.cmd"
+error: errors encountered during linking; "app.out" not built
+
+>> Compilation failure
+make[1]: *** [Makefile:104: link] Error 1
+make: *** [Makefile:151: echo] Error 2
+rm: cannot remove 'build/kernel/echo.o': No such file or directory
+/home/victorgilbert/ti/compiler/ti-cgt-arm_20.2.7.LTS/bin/armcl -mv7R5 --code_state=32 --float_support=VFPv3D16 -Ooff -c --opt_for_speed=0 -g --c99 --diag_warning=225 --diag_wrap=off --display_error_number --enum_type=packed --abi=eabi -I ./arch/arm/armv7/include -I ./arch/arm/armv7/include/arch -I ./include/kernel -I ./include/libpok_legacy/ -I ./arch/arm/armv7/drivers/include -I ./arch/arm/armv7/boards/armv7/include -I ./arch/arm/armv7/boards/armv7/include/bsp/ -I ./drivers/bus/include/ -I /home/victorgilbert/ti/compiler/ti-cgt-arm_20.2.7.LTS/lib/src -I /home/victorgilbert/ti/compiler/ti-cgt-arm_20.2.7.LTS/lib/src/machine -I ./arch/arm/armv7/common  -I ./include -I ./include/lib -I ./drivers/bus/include -I ./drivers/device/include -I ./arch/common -Wall -O2 -c  -mmcu=armv7  -fverbose-asm -ffreestanding  -D F_CPU=10000000 -D USART_BAUD=19200 -DF_TIMER=100 -D UNKNOWN_HEAP -D LOW_MEM -Ooff  -D__VER__=\"0.97\"  -o ./build/app/echo.o app/echo.c
+>> WARNING: invalid compiler option --Wall (ignored)
+>> WARNING: invalid compiler option -mmcu=armv7 (ignored)
+>> WARNING: invalid compiler option -fverbose-asm (ignored)
+>> WARNING: object file specified, but linking not enabled
+[echo.c]
+"./arch/arm/armv7/include/hal.h", line 99: warning #1-D: last line of file ends without a newline
+"./arch/arm/armv7/include/hal.h", line 60: warning #303-D: typedef name has already been declared (with same type)
+"./arch/arm/armv7/include/hal.h", line 99: warning #1-D: last line of file ends without a newline
+"./include/lib/libc.h", line 3: warning #48-D: incompatible redefinition of macro "NULL" (declared at line 51 of "./arch/arm/armv7/boards/armv7/include/stddef.h")
+"./include/kernel/timer.h", line 20: warning #48-D: incompatible redefinition of macro "F_TIMER"
+"./include/kernel/errno.h", line 133: warning #1-D: last line of file ends without a newline
+/home/victorgilbert/ti/compiler/ti-cgt-arm_20.2.7.LTS/bin/armcl --run_linker -i"/home/victorgilbert/ti/compiler/ti-cgt-arm_20.2.7.LTS/lib" -Ooff ./build/app/*.o ./build/kernel/*.o --output_file=app.out --no_warnings  -library=./arch/arm/armv7/drivers/linker.cmd --map_file=app.map
+warning: Case insensitivity of options has been deprecated; O must be written
+   as o in future releases
+<Linking>
+error: cannot find file "ibrary=./arch/arm/armv7/drivers/linker.cmd"
+error: errors encountered during linking; "app.out" not built
+
+>> Compilation failure
+make[1]: *** [Makefile:104: link] Error 1
+make: *** [Makefile:151: echo] Error 2

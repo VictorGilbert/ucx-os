@@ -42,37 +42,37 @@
 
 /*----------------------------------------------------------------------------*/
 /* Memory Map                                                                 */
-
+/*----------------------------------------------------------------------------*/
 MEMORY
 {
-	/* Interrupt vector */
-    VECTORS (X)  : origin=0x00000000 length=0x00001000
-    FLASH   (RX) : origin=0x00001000 length=0x000FFFE0
-    S_FLASH (RX) : origin=0x00100FE0 length=0x00100000
-    HEAP    (RW) : origin=0x00200FE0 length=0x00010000
-    KRAM    (RW) : origin=0x00210FE0 length=0x00004000
-    URAM    (RW) : origin=0x00214FE0 length=0x00067FFF
+    VECTORS     (RX) : origin = 0x00000000 length = 0x0000100 /* Vector table */
+    FLASH0      (RX) : origin = 0x00000100 length = 0x000FF000 /* Remaining flash */
+    RAM         (RW) : origin = 0x08000000 length = 0x00080000 /* Internal SRAM */
 }
-
+ 
 /*----------------------------------------------------------------------------*/
-/* Section Configuration                                                      */
-
+/* Section Allocation                                                         */
+/*----------------------------------------------------------------------------*/
 SECTIONS
 {
-	/* Int vectors first */
-    .intvecs :               {} > VECTORS
-    /* Rest of code to user mode flash region */
-    .text        align(32) : {} > FLASH
-    .const       align(32) : {} > FLASH
-    .data        align(32) : {} > KRAM
-    .bss         align(32) : {} > KRAM
-    .cinit                 : {} > FLASH
-    .shared_code align(32) : {} > S_FLASH
-    .sysheap     align(32) : {} > HEAP
-
-
+    .intvecs : {}              > VECTORS       /* Interrupt vectors */
+    .text    : {}              > FLASH0        /* Code */
+    .const   : {}              > FLASH0        /* Constants */
+    .cinit   : {}              > FLASH0        /* C init tables */
+    .pinit   : {}              > FLASH0        /* Constructors (C++) */
+    .binit   : {}              > FLASH0        /* Binit table (rare) */
+ 
+    .data    : {}              > RAM AT > FLASH0 /* Initialized variables */
+    .bss     : {}              > RAM           /* Uninitialized variables */
+    .sysmem  : {}              > RAM           /* Heap */
+    .stack   : {}              > RAM           /* Stack */
 }
-
+ 
+/*----------------------------------------------------------------------------*/
+/* Stack and Heap Sizes                                                      */
+/*----------------------------------------------------------------------------*/
+__stack_size = 0x1000;  /* 4KB stack */
+__heap_size  = 0x1000;  /* 4KB heap */
 /*----------------------------------------------------------------------------*/
 /* Misc                                                                       */
 __archive2_begin = 0x00200000;

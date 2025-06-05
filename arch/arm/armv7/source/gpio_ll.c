@@ -1,8 +1,8 @@
 #include <hal.h>
 #include <kernel/kernel.h>
 #include <kernel/ecodes.h>
-#include </home/victorgilbert/Portage_UCX-OS_TMS570/repo/ucx-os-forked/drivers/bus/include/i2c.h>
-#include </home/victorgilbert/Portage_UCX-OS_TMS570/repo/ucx-os-forked/drivers/bus/include/pwm.h>
+#include <i2c.h>
+#include <pwm.h>
 #include <HL_reg_gio.h>
 #include <thread.h>
 #include <gpio.h>

@@ -47,5 +47,5 @@ struct stat {
 	unsigned long	st_mtime_nsec;
 	unsigned long	st_ctime;
 	unsigned long	st_ctime_nsec;
-	long		__unused[3];
+	long		reserved[3];
 };

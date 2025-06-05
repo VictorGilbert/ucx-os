@@ -1,5 +1,5 @@
-PATH_TO_TI_DIR = /home/victorgilbert/ti
-TI_ENV = ${PATH_TO_TI_DIR}/compiler/ti-cgt-arm_20.2.7.LTS/bin 
+PATH_TO_TI_DIR = /home/victorgilbert/ti/compiler
+TI_ENV = ${PATH_TO_TI_DIR}/ti-cgt-arm_20.2.7.LTS/bin 
 ARCH_DIR = $(SRC_DIR)/arch/$(ARCH)
 
 # core speed
@@ -18,35 +18,35 @@ INC_DIRS  = -I $(ARCH_DIR)/include \
 	-I $(ARCH_DIR)/boards/armv7/include \
 	-I $(ARCH_DIR)/boards/armv7/include/bsp/ \
 	-I $(SRC_DIR)/drivers/bus/include/ \
-	-I ${PATH_TO_TI_DIR}/compiler/ti-cgt-arm_20.2.7.LTS/lib/src \
-	-I ${PATH_TO_TI_DIR}/compiler/ti-cgt-arm_20.2.7.LTS/lib/src/machine \
-	-I $(ARCH_DIR)/common
+	-I ${PATH_TO_TI_DIR}/ti-cgt-arm_20.2.7.LTS/lib/src \
+	-I ${PATH_TO_TI_DIR}/ti-cgt-arm_20.2.7.LTS/lib/src/machine \
+	-I $(ARCH_DIR)/common \
 
 
-CC = ${PATH_TO_TI_DIR}/compiler/ti-cgt-arm_20.2.7.LTS/bin/armcl
-AS = ${PATH_TO_TI_DIR}/compiler/ti-cgt-arm_20.2.7.LTS/bin/armasm
-LD = ${PATH_TO_TI_DIR}/compiler/ti-cgt-arm_20.2.7.LTS/bin/armlnk
-DUMP = ${PATH_TO_TI_DIR}/compiler/ti-cgt-arm_20.2.7.LTS/bin/armobjdump
-READ = ${PATH_TO_TI_DIR}/compiler/ti-cgt-arm_20.2.7.LTS/bin/armreadelf
-OBJ = ${PATH_TO_TI_DIR}/compiler/ti-cgt-arm_20.2.7.LTS/bin/armobjcopy
-SIZE = ${PATH_TO_TI_DIR}/compiler/ti-cgt-arm_20.2.7.LTS/bin/armsize
-AR = ${PATH_TO_TI_DIR}/compiler/ti-cgt-arm_20.2.7.LTS/bin/armar
+CC = ${PATH_TO_TI_DIR}/ti-cgt-arm_20.2.7.LTS/bin/armcl
+AS = ${PATH_TO_TI_DIR}/ti-cgt-arm_20.2.7.LTS/bin/armasm
+LD = ${PATH_TO_TI_DIR}/ti-cgt-arm_20.2.7.LTS/bin/armlnk
+DUMP = ${PATH_TO_TI_DIR}/ti-cgt-arm_20.2.7.LTS/bin/armobjdump
+READ = ${PATH_TO_TI_DIR}/ti-cgt-arm_20.2.7.LTS/bin/armreadelf
+OBJ = ${PATH_TO_TI_DIR}/ti-cgt-arm_20.2.7.LTS/bin/armobjcopy
+SIZE = ${PATH_TO_TI_DIR}/ti-cgt-arm_20.2.7.LTS/bin/armsize
+AR = ${PATH_TO_TI_DIR}/ti-cgt-arm_20.2.7.LTS/bin/armar
 
-CFLAGS = -mv7R5 --code_state=32 --float_support=VFPv3D16 -Ooff -c      	\
+CFLAGS = -mv7R5 --code_state=32 --float_support=VFPv3D16 -c      	\
          --opt_for_speed=0 -g --c99 --diag_warning=225 --diag_wrap=off 	\
          --display_error_number --enum_type=packed --abi=eabi          	\
          ${INC_DIRS} -Wall -O2 -c  -mmcu=armv7 $(MCU_DEFINES) \
 		 -fverbose-asm -ffreestanding $(C_DEFINES)\
 		 -D F_CPU=$(F_CLK) -D USART_BAUD=$(SERIAL_BAUDRATE) \
 		 -DF_TIMER=${F_TICK} -D UNKNOWN_HEAP -D LOW_MEM\
+		#  --float_support=vfpv3d16 \
+		 
          
-LDFLAGS = -i"${PATH_TO_TI_DIR}/compiler/ti-cgt-arm_20.2.7.LTS/lib"
+LDFLAGS = -i"${PATH_TO_TI_DIR}/ti-cgt-arm_20.2.7.LTS/lib"
 .PHONY: hal
 hal:
 	$(CC) $(CFLAGS) -o $(ARCH_DIR)/boards/armv7/*.c
 	$(CC) $(CFLAGS) -o $(ARCH_DIR)/drivers/source/*.c
-	$(CC) $(CFLAGS) -o $(LDFLAGS)/src/*.c
-
 	$(CC) $(CFLAGS) -o entry.o $(ARCH_DIR)/source/entry.asm
 	$(CC) $(CFLAGS) -o interrupt.o $(ARCH_DIR)/source/interrupt.asm
 	$(CC) $(CFLAGS) -o cswitch.o $(ARCH_DIR)/source/cswitch.asm
@@ -58,6 +58,11 @@ hal:
 	$(CC) $(CFLAGS) -o HL_sys_mpu.o $(ARCH_DIR)/drivers/source/HL_sys_mpu.asm
 	$(CC) $(CFLAGS) -o HL_sys_pmu.o $(ARCH_DIR)/drivers/source/HL_sys_pmu.asm
 	$(CC) $(CFLAGS) -o $(ARCH_DIR)/source/*.c
-	
+	$(CC) $(CFLAGS) -o $(LDFLAGS)/src/*.c
+
+
 	sh ./$(ARCH_DIR)/rename_obj_to_o.sh
+#$(CC) $(CFLAGS) -o mpu.o $(ARCH_DIR)/source/mpu.asm
+# $(CC) $(CFLAGS) -o ${PATH_TO_TI_DIR}/ti-cgt-arm_20.2.7.LTS/lib/src/*c
+# -I ${PATH_TO_TI_DIR}/ti-cgt-arm_20.2.7.LTS/lib/src/machine \
 # $(ARCH_DIR)/boards/armv7/boards/*.c \

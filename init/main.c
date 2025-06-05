@@ -5,6 +5,10 @@
  */
 
 #include <ucx.h>
+#include <hal.h>
+// /*TEMPORARY FIX*/
+// __attribute__((weak)) int app_main(void);
+// /*TEMPORARY FIX*/
 
 uint32_t __bss_end; //TODO: Make it compile without this definition
 

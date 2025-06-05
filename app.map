@@ -1,0 +1,593 @@
+******************************************************************************
+                  TI ARM Linker Unix v20.2.7                   
+******************************************************************************
+>> Linked Thu Jun  5 15:57:53 2025
+
+OUTPUT FILE NAME:   <app.out>
+ENTRY POINT SYMBOL: "_c_int00"  address: 00003798
+
+
+MEMORY CONFIGURATION
+
+         name            origin    length      used     unused   attr    fill
+----------------------  --------  ---------  --------  --------  ----  --------
+  VECTORS               00000000   00000100  0000001c  000000e4  R  X
+  FLASH0                00000100   000ff000  000038d0  000fb730  R  X
+  RAM                   08000000   00080000  00000898  0007f768  RW  
+
+
+SEGMENT ALLOCATION MAP
+
+run origin  load origin   length   init length attrs members
+----------  ----------- ---------- ----------- ----- -------
+00000000    00000000    0000001c   0000001c    r-x
+  00000000    00000000    0000001c   0000001c    r-x .intvecs
+00000100    00000100    000038d0   000038d0    r-x
+  00000100    00000100    000036bc   000036bc    r-x .text
+  000037bc    000037bc    00000214   00000214    r-- .const
+08000000    08000000    00000800   00000000    rw-
+  08000000    08000000    00000800   00000000    rw- .stack
+08000800    08000800    00000098   0000007c    rw-
+  08000800    08000800    0000007c   0000007c    rw- .data
+  0800087c    0800087c    0000001c   00000000    rw- .bss
+
+
+SECTION ALLOCATION MAP
+
+ output                                  attributes/
+section   page    origin      length       input sections
+--------  ----  ----------  ----------   ----------------
+.intvecs   0    00000000    0000001c     
+                  00000000    0000001c     interrupt.o (.intvecs)
+
+.text      0    00000100    000036bc     
+                  00000100    00000b18     libc.o (.text)
+                  00000c18    000009b4     ucx.o (.text)
+                  000015cc    000006a0     list.o (.text)
+                  00001c6c    000004d4     HL_sys_vim.o (.text)
+                  00002140    0000039c     pipe.o (.text)
+                  000024dc    000002b4     rtsv7R4_A_be_v3D16_eabi.lib : ull_div32.asm.obj (.text)
+                  00002790    00000280     rti.o (.text)
+                  00002a10    00000230     malloc.o (.text)
+                  00002c40    00000180     rtsv7R4_A_be_v3D16_eabi.lib : memcpy32.asm.obj (.text)
+                  00002dc0    00000178     HL_sys_vim.o (.text:retain)
+                  00002f38    00000134     main.o (.text)
+                  0000306c    00000130     echo.o (.text)
+                  0000319c    000000e4     HL_esm.o (.text:retain)
+                  00003280    000000ac     HL_sys_startup.o (.text)
+                  0000332c    000000a4     cswitch.o (.text)
+                  000033d0    00000098     rtsv7R4_A_be_v3D16_eabi.lib : ll_div32.asm.obj (.text)
+                  00003468    00000088     console.o (.text)
+                  000034f0    00000084     rtsv7R4_A_be_v3D16_eabi.lib : cpy_tbl.c.obj (.text:copy_in)
+                  00003574    0000007c                                 : fd_toull32.asm.obj (.text)
+                  000035f0    00000070     HL_notification.o (.text)
+                  00003660    00000054     rtsv7R4_A_be_v3D16_eabi.lib : i_div32.asm.obj (.text)
+                  000036b4    00000050                                 : u_div32.asm.obj (.text)
+                  00003704    00000040                                 : ull_tofd32.asm.obj (.text)
+                  00003744    0000002c     interrupt.o (.text)
+                  00003770    00000028     rtsv7R4_A_be_v3D16_eabi.lib : setjmp32.asm.obj (.text)
+                  00003798    00000010     HL_sys_startup.o (.text:retain)
+                  000037a8    00000008     rtsv7R4_A_be_v3D16_eabi.lib : exit.c.obj (.text:abort:abort)
+                  000037b0    00000004                                 : startup.c.obj (.text:_system_post_cinit)
+                  000037b4    00000004     HL_sys_phantom.o (.text:retain)
+                  000037b8    00000004     rtsv7R4_A_be_v3D16_eabi.lib : div0.asm.obj (.text)
+
+.const     0    000037bc    00000214     
+                  000037bc    00000200     HL_sys_vim.o (.const:s_vim_init)
+                  000039bc    00000014     ecodes.o (.const:.string)
+
+.cinit     0    00000100    00000000     UNINITIALIZED
+
+.data      0    08000800    0000007c     
+                  08000800    00000054     ucx.o (.data:kernel_state)
+                  08000854    00000010     ecodes.o (.data:edatadesc)
+                  08000864    0000000c     console.o (.data)
+                  08000870    00000004     ecodes.o (.data)
+                  08000874    00000004     libc.o (.data)
+                  08000878    00000004     ucx.o (.data)
+
+.bss       0    0800087c    0000001c     UNINITIALIZED
+                  0800087c    00000004     libc.o (.bss)
+                  08000880    00000004     (.common:__bss_end)
+                  08000884    00000004     (.common:first_free)
+                  08000888    00000004     (.common:last_free)
+                  0800088c    00000004     (.common:pipe)
+                  08000890    00000004     (.common:system_time_high)
+                  08000894    00000004     (.common:system_time_low)
+
+.stack     0    08000000    00000800     UNINITIALIZED
+                  08000000    00000800     --HOLE--
+
+__llvm_prf_cnts 
+*          0    08000000    00000000     UNINITIALIZED
+
+MODULE SUMMARY
+
+       Module               code    ro data   rw data
+       ------               ----    -------   -------
+    ./build/app/
+       echo.o               304     0         4      
+    +--+--------------------+-------+---------+---------+
+       Total:               304     0         4      
+                                                     
+    ./build/kernel/
+       libc.o               2840    0         8      
+       ucx.o                2484    0         88     
+       HL_sys_vim.o         1612    512       0      
+       list.o               1696    0         0      
+       pipe.o               924     0         0      
+       rti.o                640     0         8      
+       malloc.o             560     0         8      
+       main.o               308     0         4      
+       HL_esm.o             228     0         0      
+       HL_sys_startup.o     188     0         0      
+       cswitch.o            164     0         0      
+       console.o            136     0         12     
+       HL_notification.o    112     0         0      
+       interrupt.o          72      0         0      
+       ecodes.o             0       20        20     
+       HL_sys_phantom.o     4       0         0      
+    +--+--------------------+-------+---------+---------+
+       Total:               11968   532       148    
+                                                     
+    /home/victorgilbert/ti/compiler/ti-cgt-arm_20.2.7.LTS/lib/rtsv7R4_A_be_v3D16_eabi.lib
+       ull_div32.asm.obj    692     0         0      
+       memcpy32.asm.obj     384     0         0      
+       ll_div32.asm.obj     152     0         0      
+       cpy_tbl.c.obj        132     0         0      
+       fd_toull32.asm.obj   124     0         0      
+       i_div32.asm.obj      84      0         0      
+       u_div32.asm.obj      80      0         0      
+       ull_tofd32.asm.obj   64      0         0      
+       setjmp32.asm.obj     40      0         0      
+       exit.c.obj           8       0         0      
+       div0.asm.obj         4       0         0      
+       startup.c.obj        4       0         0      
+    +--+--------------------+-------+---------+---------+
+       Total:               1768    0         0      
+                                                     
+       Stack:               0       0         2048   
+    +--+--------------------+-------+---------+---------+
+       Grand Total:         14040   532       2200   
+
+
+GLOBAL SYMBOLS: SORTED ALPHABETICALLY BY Name 
+
+address   name                       
+-------   ----                       
+000037a8  C$$EXIT                    
+UNDEFED   SHT$$INIT_ARRAY$$Base      
+UNDEFED   SHT$$INIT_ARRAY$$Limit     
+08000800  __STACK_END                
+00000800  __STACK_SIZE               
+UNDEFED   __TI_CINIT_Base            
+UNDEFED   __TI_CINIT_Limit           
+UNDEFED   __TI_Handler_Table_Base    
+UNDEFED   __TI_Handler_Table_Limit   
+00003284  __TI_auto_init             
+ffffffff  __TI_pprof_out_hndl        
+ffffffff  __TI_prof_data_size        
+ffffffff  __TI_prof_data_start       
+00000000  __TI_static_base__         
+00003574  __aeabi_d2ulz              
+00003660  __aeabi_idiv               
+000037b8  __aeabi_idiv0              
+00003660  __aeabi_idivmod            
+000037b8  __aeabi_ldiv0              
+000033d0  __aeabi_ldivmod            
+00002c40  __aeabi_memcpy             
+00002c40  __aeabi_memcpy4            
+00002c40  __aeabi_memcpy8            
+000036b4  __aeabi_uidiv              
+000036b4  __aeabi_uidivmod           
+00003704  __aeabi_ul2d               
+000024dc  __aeabi_uldivmod           
+00200000  __archive2_begin           
+ffffffff  __binit__                  
+08000880  __bss_end                  
+ffffffff  __c_args__                 
+00001000  __heap_size                
+08000000  __stack                    
+00001000  __stack_size               
+08000000  __start___llvm_prf_cnts    
+08000000  __stop___llvm_prf_cnts     
+00003798  _c_int00                   
+UNDEFED   _context_init              
+00003748  _disable_IRQ_interrupt_    
+00003760  _disable_interrupt_        
+00001500  _dispatch                  
+00003750  _enable_IRQ_interrupt_     
+00003758  _enable_interrupt_         
+00003768  _get_cspr_                 
+000034d0  _getchar                   
+UNDEFED   _hardware_init             
+UNDEFED   _interrupt_tick            
+000034bc  _kbhit                     
+000034a4  _putchar                   
+UNDEFED   _read_us                   
+00003770  _setjmp                    
+00003490  _stdin_install             
+0000347c  _stdout_install            
+00003468  _stdpoll_install           
+000037b0  _system_post_cinit         
+00000d78  _yield                     
+000037a8  abort                      
+0000365c  adcNotification            
+00003104  app_main                   
+ffffffff  binit                      
+00003658  canErrorNotification       
+00003654  canMessageNotification     
+00003650  canStatusChangeNotification
+00003334  context_restore            
+000034f0  copy_in                    
+0000364c  crcNotification            
+00003648  dccNotification            
+00003744  defaultint                 
+00001500  dispatch                   
+00001bdc  dlist_create               
+00001ba0  dlist_destroy              
+00001b60  dlist_foreach              
+00001b08  dlist_index                
+00001aa8  dlist_insert               
+00001a5c  dlist_pop                  
+00001a00  dlist_popback              
+000019a0  dlist_push                 
+00001940  dlist_pushback             
+000018e8  dlist_remove               
+00003644  dmaGroupANotification      
+00003640  ecapNotification           
+0000363c  edgeNotification           
+00003638  emacRxNotification         
+00003634  emacTxNotification         
+00003630  epcCAMFullNotification     
+0000362c  epcFIFOFullNotification    
+00003628  eqepNotification           
+00003624  esmGroup1Notification      
+00003620  esmGroup2Notification      
+0000361c  esmGroup3Notification      
+0000319c  esmHighInterrupt           
+00003618  etpwmNotification          
+00003614  etpwmTripNotification      
+08000884  first_free                 
+00003610  gioNotification            
+00003280  handlePLLLockFail          
+0000360c  hetNotification            
+00003608  i2cNotification            
+00002948  init_rti                   
+00002914  ja_bsp_process_timer       
+000028f4  ja_calendar_time           
+0000332c  ja_context_jump            
+00003368  ja_context_restart         
+00003374  ja_context_restart_and_save
+00003378  ja_context_switch          
+00002894  ja_get_hpet_ns             
+00003370  ja_kernel_thread           
+00002858  ja_system_time             
+08000878  kcb                        
+08000800  kernel_state               
+00001490  krnl_dispatcher            
+00001488  krnl_noop_rtsched          
+00000c18  krnl_panic                 
+00000cbc  krnl_schedule              
+08000888  last_free                  
+00003604  linNotification            
+0000186c  list_create                
+00001830  list_destroy               
+000017f0  list_foreach               
+000017b8  list_index                 
+00001764  list_insert                
+00001720  list_pop                   
+000016c0  list_popback               
+00001674  list_push                  
+00001620  list_pushback              
+000015cc  list_remove                
+00003780  longjmp                    
+00002f38  main                       
+00002c40  memcpy                     
+00003600  mibspiGroupNotification    
+000035fc  mibspiNotification         
+08000870  perror                     
+000037b4  phantomInterrupt           
+0800088c  pipe                       
+000035f8  pwmNotification            
+0000284c  rtiEnableNotification      
+0000281c  rtiGetCurrentTick          
+00002810  rtiGetPeriod               
+000035f4  rtiNotification            
+000027dc  rtiResetCounter            
+000027d0  rtiSetPeriod               
+000027b8  rtiStartCounter            
+000027a0  rtiStopCounter             
+00002790  rti_eoi                    
+000035f0  sciNotification            
+00003770  setjmp                     
+08000890  system_time_high           
+08000894  system_time_low            
+000030cc  task0                      
+0000306c  task1                      
+00003388  timer_int_wrapper          
+00000c00  ucx_abs                    
+00000b88  ucx_atoi                   
+00002c08  ucx_calloc                 
+00000b40  ucx_fgets                  
+00002b20  ucx_free                   
+00000ac4  ucx_getline                
+00000a74  ucx_gets                   
+00002bcc  ucx_heap_init              
+00000960  ucx_itoa                   
+00002a10  ucx_malloc                 
+00000924  ucx_memcmp                 
+00000904  ucx_memcpy                 
+000008b8  ucx_memmove                
+00000898  ucx_memset                 
+00002454  ucx_pipe_create            
+000023dc  ucx_pipe_destroy           
+00002394  ucx_pipe_flush             
+0000231c  ucx_pipe_nbread            
+000022a8  ucx_pipe_nbwrite           
+0000223c  ucx_pipe_read              
+000021f4  ucx_pipe_size              
+00002180  ucx_pipe_write             
+0000086c  ucx_printf                 
+0000083c  ucx_puts                   
+0000081c  ucx_random                 
+00002b74  ucx_realloc                
+000007e0  ucx_sprintf                
+000004cc  ucx_srand                  
+000004a0  ucx_strcat                 
+0000047c  ucx_strchr                 
+00000454  ucx_strcmp                 
+00000438  ucx_strcpy                 
+00000418  ucx_strlen                 
+000003cc  ucx_strncat                
+0000039c  ucx_strncmp                
+0000033c  ucx_strncpy                
+000001a4  ucx_strpbrk                
+000001e8  ucx_strsep                 
+000002f0  ucx_strstr                 
+0000025c  ucx_strtok                 
+0000022c  ucx_strtok_r               
+00000100  ucx_strtol                 
+000013a4  ucx_task_cancel            
+00001390  ucx_task_count             
+00001340  ucx_task_delay             
+00001328  ucx_task_id                
+000012b0  ucx_task_idref             
+000011d0  ucx_task_priority          
+0000112c  ucx_task_resume            
+000010a4  ucx_task_rt_priority       
+00000f38  ucx_task_spawn             
+00000e5c  ucx_task_suspend           
+00000e24  ucx_task_wfi               
+00000e20  ucx_task_yield             
+00000e10  ucx_ticks                  
+00000df8  ucx_uptime                 
+00002070  vimChannelMap              
+00002018  vimDisableInterrupt        
+00002dc0  vimECCErrorHandler         
+00001f04  vimEnableInterrupt         
+00001ccc  vimGetConfigValue          
+00001c6c  vimInit                    
+00000d78  yield                      
+
+
+GLOBAL SYMBOLS: SORTED BY Symbol Address 
+
+address   name                       
+-------   ----                       
+00000000  __TI_static_base__         
+00000100  ucx_strtol                 
+000001a4  ucx_strpbrk                
+000001e8  ucx_strsep                 
+0000022c  ucx_strtok_r               
+0000025c  ucx_strtok                 
+000002f0  ucx_strstr                 
+0000033c  ucx_strncpy                
+0000039c  ucx_strncmp                
+000003cc  ucx_strncat                
+00000418  ucx_strlen                 
+00000438  ucx_strcpy                 
+00000454  ucx_strcmp                 
+0000047c  ucx_strchr                 
+000004a0  ucx_strcat                 
+000004cc  ucx_srand                  
+000007e0  ucx_sprintf                
+00000800  __STACK_SIZE               
+0000081c  ucx_random                 
+0000083c  ucx_puts                   
+0000086c  ucx_printf                 
+00000898  ucx_memset                 
+000008b8  ucx_memmove                
+00000904  ucx_memcpy                 
+00000924  ucx_memcmp                 
+00000960  ucx_itoa                   
+00000a74  ucx_gets                   
+00000ac4  ucx_getline                
+00000b40  ucx_fgets                  
+00000b88  ucx_atoi                   
+00000c00  ucx_abs                    
+00000c18  krnl_panic                 
+00000cbc  krnl_schedule              
+00000d78  _yield                     
+00000d78  yield                      
+00000df8  ucx_uptime                 
+00000e10  ucx_ticks                  
+00000e20  ucx_task_yield             
+00000e24  ucx_task_wfi               
+00000e5c  ucx_task_suspend           
+00000f38  ucx_task_spawn             
+00001000  __heap_size                
+00001000  __stack_size               
+000010a4  ucx_task_rt_priority       
+0000112c  ucx_task_resume            
+000011d0  ucx_task_priority          
+000012b0  ucx_task_idref             
+00001328  ucx_task_id                
+00001340  ucx_task_delay             
+00001390  ucx_task_count             
+000013a4  ucx_task_cancel            
+00001488  krnl_noop_rtsched          
+00001490  krnl_dispatcher            
+00001500  _dispatch                  
+00001500  dispatch                   
+000015cc  list_remove                
+00001620  list_pushback              
+00001674  list_push                  
+000016c0  list_popback               
+00001720  list_pop                   
+00001764  list_insert                
+000017b8  list_index                 
+000017f0  list_foreach               
+00001830  list_destroy               
+0000186c  list_create                
+000018e8  dlist_remove               
+00001940  dlist_pushback             
+000019a0  dlist_push                 
+00001a00  dlist_popback              
+00001a5c  dlist_pop                  
+00001aa8  dlist_insert               
+00001b08  dlist_index                
+00001b60  dlist_foreach              
+00001ba0  dlist_destroy              
+00001bdc  dlist_create               
+00001c6c  vimInit                    
+00001ccc  vimGetConfigValue          
+00001f04  vimEnableInterrupt         
+00002018  vimDisableInterrupt        
+00002070  vimChannelMap              
+00002180  ucx_pipe_write             
+000021f4  ucx_pipe_size              
+0000223c  ucx_pipe_read              
+000022a8  ucx_pipe_nbwrite           
+0000231c  ucx_pipe_nbread            
+00002394  ucx_pipe_flush             
+000023dc  ucx_pipe_destroy           
+00002454  ucx_pipe_create            
+000024dc  __aeabi_uldivmod           
+00002790  rti_eoi                    
+000027a0  rtiStopCounter             
+000027b8  rtiStartCounter            
+000027d0  rtiSetPeriod               
+000027dc  rtiResetCounter            
+00002810  rtiGetPeriod               
+0000281c  rtiGetCurrentTick          
+0000284c  rtiEnableNotification      
+00002858  ja_system_time             
+00002894  ja_get_hpet_ns             
+000028f4  ja_calendar_time           
+00002914  ja_bsp_process_timer       
+00002948  init_rti                   
+00002a10  ucx_malloc                 
+00002b20  ucx_free                   
+00002b74  ucx_realloc                
+00002bcc  ucx_heap_init              
+00002c08  ucx_calloc                 
+00002c40  __aeabi_memcpy             
+00002c40  __aeabi_memcpy4            
+00002c40  __aeabi_memcpy8            
+00002c40  memcpy                     
+00002dc0  vimECCErrorHandler         
+00002f38  main                       
+0000306c  task1                      
+000030cc  task0                      
+00003104  app_main                   
+0000319c  esmHighInterrupt           
+00003280  handlePLLLockFail          
+00003284  __TI_auto_init             
+0000332c  ja_context_jump            
+00003334  context_restore            
+00003368  ja_context_restart         
+00003370  ja_kernel_thread           
+00003374  ja_context_restart_and_save
+00003378  ja_context_switch          
+00003388  timer_int_wrapper          
+000033d0  __aeabi_ldivmod            
+00003468  _stdpoll_install           
+0000347c  _stdout_install            
+00003490  _stdin_install             
+000034a4  _putchar                   
+000034bc  _kbhit                     
+000034d0  _getchar                   
+000034f0  copy_in                    
+00003574  __aeabi_d2ulz              
+000035f0  sciNotification            
+000035f4  rtiNotification            
+000035f8  pwmNotification            
+000035fc  mibspiNotification         
+00003600  mibspiGroupNotification    
+00003604  linNotification            
+00003608  i2cNotification            
+0000360c  hetNotification            
+00003610  gioNotification            
+00003614  etpwmTripNotification      
+00003618  etpwmNotification          
+0000361c  esmGroup3Notification      
+00003620  esmGroup2Notification      
+00003624  esmGroup1Notification      
+00003628  eqepNotification           
+0000362c  epcFIFOFullNotification    
+00003630  epcCAMFullNotification     
+00003634  emacTxNotification         
+00003638  emacRxNotification         
+0000363c  edgeNotification           
+00003640  ecapNotification           
+00003644  dmaGroupANotification      
+00003648  dccNotification            
+0000364c  crcNotification            
+00003650  canStatusChangeNotification
+00003654  canMessageNotification     
+00003658  canErrorNotification       
+0000365c  adcNotification            
+00003660  __aeabi_idiv               
+00003660  __aeabi_idivmod            
+000036b4  __aeabi_uidiv              
+000036b4  __aeabi_uidivmod           
+00003704  __aeabi_ul2d               
+00003744  defaultint                 
+00003748  _disable_IRQ_interrupt_    
+00003750  _enable_IRQ_interrupt_     
+00003758  _enable_interrupt_         
+00003760  _disable_interrupt_        
+00003768  _get_cspr_                 
+00003770  _setjmp                    
+00003770  setjmp                     
+00003780  longjmp                    
+00003798  _c_int00                   
+000037a8  C$$EXIT                    
+000037a8  abort                      
+000037b0  _system_post_cinit         
+000037b4  phantomInterrupt           
+000037b8  __aeabi_idiv0              
+000037b8  __aeabi_ldiv0              
+00200000  __archive2_begin           
+08000000  __stack                    
+08000000  __start___llvm_prf_cnts    
+08000000  __stop___llvm_prf_cnts     
+08000800  __STACK_END                
+08000800  kernel_state               
+08000870  perror                     
+08000878  kcb                        
+08000880  __bss_end                  
+08000884  first_free                 
+08000888  last_free                  
+0800088c  pipe                       
+08000890  system_time_high           
+08000894  system_time_low            
+ffffffff  __TI_pprof_out_hndl        
+ffffffff  __TI_prof_data_size        
+ffffffff  __TI_prof_data_start       
+ffffffff  __binit__                  
+ffffffff  __c_args__                 
+ffffffff  binit                      
+UNDEFED   SHT$$INIT_ARRAY$$Base      
+UNDEFED   SHT$$INIT_ARRAY$$Limit     
+UNDEFED   __TI_CINIT_Base            
+UNDEFED   __TI_CINIT_Limit           
+UNDEFED   __TI_Handler_Table_Base    
+UNDEFED   __TI_Handler_Table_Limit   
+UNDEFED   _context_init              
+UNDEFED   _hardware_init             
+UNDEFED   _interrupt_tick            
+UNDEFED   _read_us                   
+
+[214 symbols]

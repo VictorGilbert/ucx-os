@@ -34,24 +34,57 @@
 ;
 ;
 ;
+; interrupt vectors
+    .sect ".intvecs"
+    .arm
+    .code 32
+ 
+    .ref _c_int00
+ 
+    .global resetEntry
+    .global undefEntry
+    .global svcEntry
+    .global prefetchEntry
+    .global dataEntry
+    .global reservedEntry
+    .global irqEntry
+    .global fiqEntry
+ 
+    .def resetEntry
+    .def undefEntry
+    .def svcEntry
+    .def prefetchEntry
+    .def dataEntry
+    .def reservedEntry
+    .def irqEntry
+    .def fiqEntry
+ 
+resetEntry:
+    .word _c_int00        
+undefEntry:
+    .word undefEntry       
+svcEntry:
+    .word svcEntry
+prefetchEntry:
+    .word prefetchEntry
+dataEntry:
+        ldr pc,[pc,#-0x1b0]
+        ldr pc,[pc,#-0x1b0]reservedEntry:
+    .word reservedEntry
+irqEntry:
+    .word irqEntry
+fiqEntry:
+    .word fiqEntry
 
     .sect ".intvecs"
     .arm
-
-
-;-------------------------------------------------------------------------------
-; import reference for interrupt routines
-
     .ref _c_int00
-    .def resetEntry
-
-;-------------------------------------------------------------------------------
-; interrupt vectors
-
-resetEntry
-        b   _c_int00
-undefEntry
-        b   undefEntry
+ 
+resetEntry:
+    B _c_int00         ; instead of .word _c_int00
+ 
+undefEntry:
+    B undefEntry
 svcEntry
         b   svcEntry
 prefetchEntry

@@ -171,11 +171,25 @@ int _usleep(int usec)
 	return 0;
 }
 
+//TEMPORARY FIX FOR COMPILING WITH CLANG
+#ifdef __TI_COMPILER_VERSION__
+
+#include <errno.h>
+int _stat(char *file, struct stat *st)
+{
+	errno = EINVAL;
+	return -1;
+}
+
+#else
+
 int _stat(char *file, struct stat *st)
 {
 	st->st_mode = S_IFCHR;
 	return 0;
 }
+#endif
+//TEMPORARY FIX FOR COMPILING WITH CLANG
 
 int _open(char *path, int flags)
 {

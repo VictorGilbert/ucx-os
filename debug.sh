@@ -2,17 +2,19 @@
 
 # rm *.o
 # rm build/kernel/*.o
-
-# make clean
+rm app.out
+make veryclean
 make incl ARCH="arm/armv7"
 make hal
 make libs
-make ddrivers
+make drivers
 make kernel
 ./rename_obj_to_o.sh
 mv ./*.o ./build/kernel/
 make ucx
+
 ./rename_obj_to_o.sh
+mv ./*.o ./build/kernel/
 make ucx
 
 mv ./echo.o build/app/echo.o
